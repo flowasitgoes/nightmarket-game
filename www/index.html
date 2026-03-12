@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2:03 AM — Taiwanese Popcorn Chicken | Night Market Game</title>
+  <meta name="description" content="A short atmospheric game about Taiwan's night market and popcorn chicken (鹹酥雞). Explore the street, meet travelers, and discover late-night fried chicken culture. Play in browser." />
+  <meta name="keywords" content="Taiwanese fried chicken, 鹹酥雞, popcorn chicken, night market, Taiwan, browser game, street food, 夜市" />
+  <meta name="author" content="2:03 AM" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#c45c3e" />
+  <!-- Canonical URL: replace with your live site URL when deploying (e.g. https://yoursite.com/) -->
+  <link rel="canonical" href="https://example.com/" />
+  <!-- Favicons (SEO + browser tabs) -->
+  <link rel="icon" type="image/jpeg" href="assets/icons/taiwanese-fried-chicken-night-market-32.jpg" sizes="32x32" />
+  <link rel="icon" type="image/jpeg" href="assets/icons/taiwanese-fried-chicken-night-market-16.jpg" sizes="16x16" />
+  <link rel="icon" type="image/jpeg" href="assets/icons/taiwanese-fried-chicken-night-market-64.jpg" sizes="64x64" />
+  <!-- PWA manifest -->
+  <link rel="manifest" href="manifest.webmanifest" />
+  <!-- Apple Touch Icon (home screen) -->
+  <link rel="apple-touch-icon" href="assets/icons/taiwanese-fried-chicken-night-market-192.jpg" />
+  <!-- Open Graph (Facebook, LINE, LinkedIn, etc.) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="2:03 AM — Taiwanese Popcorn Chicken" />
+  <meta property="og:description" content="A night market in Taiwan. Explore the street and discover late-night fried chicken (鹹酥雞) culture. Play in browser." />
+  <meta property="og:image" content="https://example.com/assets/icons/taiwanese-fried-chicken-night-market-1200.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Taiwanese fried chicken night market street scene with pixel art and food display" />
+  <meta property="og:url" content="https://example.com/" />
+  <meta property="og:site_name" content="2:03 AM — Taiwanese Popcorn Chicken" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="2:03 AM — Taiwanese Popcorn Chicken" />
+  <meta name="twitter:description" content="A night market in Taiwan. Explore the street and discover late-night fried chicken (鹹酥雞) culture." />
+  <meta name="twitter:image" content="https://example.com/assets/icons/taiwanese-fried-chicken-night-market-1200.jpg" />
+  <meta name="twitter:image:alt" content="Taiwanese fried chicken night market street scene" />
+  <!-- Structured Data (JSON-LD) for search engines -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "2:03 AM — Taiwanese Popcorn Chicken",
+    "alternateName": "2:03 AM",
+    "description": "A short atmospheric game about Taiwan's night market and popcorn chicken (鹹酥雞). Explore the street, meet travelers from Iceland to Bolivia, and discover late-night fried chicken culture. No sign-up, play in browser.",
+    "url": "https://example.com/",
+    "applicationCategory": "Game",
+    "applicationSubCategory": "Casual game",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript. Works in modern browsers.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "image": "https://example.com/assets/icons/taiwanese-fried-chicken-night-market-1200.jpg",
+    "genre": ["casual", "story", "food", "Taiwan culture", "night market"],
+    "inLanguage": "en",
+    "author": { "@type": "Organization", "name": "2:03 AM" },
+    "playMode": "SinglePlayer",
+    "gamePlatform": "Web browser",
+    "potentialAction": {
+      "@type": "PlayAction",
+      "target": "https://example.com/",
+      "name": "Play game"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://example.com/" }]
+  }
+  </script>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/minigames.css" />
+  <link rel="preload" href="css/style.css" as="style" />
+  <!-- Preconnect to external asset host (player sprites) -->
+  <link rel="preconnect" href="https://s3-us-west-2.amazonaws.com" crossorigin />
+</head>
+<body>
+  <noscript>
+    <p style="padding:2rem;text-align:center;color:#f0e6dc;background:#0d0d12;">
+      2:03 AM — Taiwanese Popcorn Chicken requires JavaScript. Please enable it to play, or visit <a href="https://ifunlove.com/" style="color:#c45c3e;">ifunlove.com</a> for more games.
+    </p>
+  </noscript>
+  <a href="https://ifunlove.com/" target="_blank" rel="noopener noreferrer" class="ifunlove-link ifunlove-link--top" aria-label="ifunlove — Playful Games, Art &amp; Design from Taiwan">ifunlove</a>
+  <main id="app" role="main">
+    <!-- Step 1: Welcome + enter name -->
+    <div id="name-overlay" class="welcome-overlay">
+      <div class="welcome-modal">
+        <p class="welcome-modal__label">Welcome</p>
+        <h1 class="welcome-modal__title">2:03 AM</h1>
+        <hr class="welcome-modal__hr" />
+        <h3 class="welcome-modal__prompt">Enter your name</h3>
+        <input id="name-input" type="text" placeholder="Your name" value="COOL" maxlength="24" autocomplete="name" />
+        <button id="btn-name-next" type="button" class="welcome-modal__btn">Next</button>
+      </div>
+    </div>
+
+    <!-- Step 2: Intro + Enter the street -->
+    <div id="title-overlay" class="hidden">
+      <h2 class="tagline">A night market in Taiwan</h2>
+      <p class="intro">You've never seen so many people lining up for fried chicken at 2 in the morning.</p>
+      <button id="btn-start" type="button">Enter the street</button>
+    </div>
+
+    <!-- Game viewport -->
+    <div id="game-viewport">
+      <div id="time-display">2:03 AM</div>
+      <div id="game-hud" aria-live="polite">
+        <span id="progress-text">Travelers: 0/10</span>
+        <span id="hint-text">Click flags & icons to talk. Buy a bag when ready.</span>
+      </div>
+      <button id="btn-mute" type="button" title="Mute">🔊</button>
+
+      <!-- 影片：本地剪輯 0:00–6:42 循環（原 YouTube 備註於下） -->
+      <div id="game-tv-frame" class="tv-frame" aria-hidden="true">
+        <div class="tv-frame__bezel">
+          <div id="game-youtube-wrap">
+            <video
+              id="game-video-player"
+              src="assets/video/game-video.mp4"
+              loop
+              muted
+              playsinline
+              preload="auto"
+              aria-label="Background video"
+              title="Night market street background"
+            ></video>
+          </div>
+        </div>
+        <div class="tv-frame__base"></div>
+      </div>
+      <!-- 若改用 YouTube 可還原：iframe src="...?start=0&end=402&loop=1&playlist=ISZkoW27_do&controls=0&..." -->
+
+      <div id="scene-container">
+        <canvas id="game-bubbles-canvas" aria-hidden="true"></canvas>
+        <div id="scene">
+          <div id="scene-bg" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <!-- Player character: fixed on road, scene scrolls underneath -->
+      <div id="player-character" class="Character Character--walk-down" aria-hidden="true">
+        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/21542/WalkingDemo-Shadow.png" class="Character_shadow pixel-art" alt="" />
+        <img id="player-sprite-sheet" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/21542/WalkingDemo-JESSIE-SHEET.png" class="Character_sprite-sheet pixel-art" alt="Player character" />
+      </div>
+
+      <button id="btn-left" type="button" aria-label="Move left">‹</button>
+      <button id="btn-right" type="button" aria-label="Move right">›</button>
+      <button id="btn-jump" type="button" aria-label="Jump"><span class="btn-jump-icon-desktop">↑</span><span class="btn-jump-icon-mobile" aria-hidden="true">Space</span></button>
+      <!-- Mobile only: up (above right) -->
+      <button id="btn-mobile-up" class="mobile-only" type="button" aria-label="Previous character">↑</button>
+    </div>
+
+    <!-- First-time hint (dismissible) -->
+    <div id="controls-hint" class="hidden">
+      <span>← → or A / D to move · Space to jump · ↑ ↓ or W / S to change character · Click flags & icons to talk</span>
+      <button id="controls-hint-dismiss" type="button">OK</button>
+    </div>
+
+    <!-- Dialogue overlay -->
+    <div id="dialogue-overlay" class="hidden">
+      <div id="dialogue-box">
+        <div id="dialogue-image-wrap" class="hidden">
+          <img id="dialogue-image" src="" alt="" />
+        </div>
+        <div id="dialogue-speaker"></div>
+        <div id="dialogue-text"></div>
+        <div id="dialogue-actions">
+          <button id="dialogue-next" type="button">Next</button>
+          <button id="dialogue-close" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ending overlay -->
+    <div id="ending-overlay" class="hidden">
+      <div id="ending-content"></div>
+    </div>
+
+    <!-- Minigame: Catch ingredients -->
+    <div id="minigame-catch-overlay" class="minigame-overlay hidden" aria-hidden="true">
+      <div class="minigame-card">
+        <h3 class="minigame-title">Catch the ingredients</h3>
+        <p class="minigame-instruction">Use ← → or tap left/right side to move the basket.</p>
+        <p id="minigame-catch-progress" class="minigame-progress">Caught: 0 / 3 · Missed: 0 / 6</p>
+        <div class="minigame-catch-area-wrap">
+          <div id="minigame-catch-area">
+            <div id="minigame-catch-basket" aria-hidden="true">🧺</div>
+          </div>
+        </div>
+        <div class="minigame-actions">
+          <button type="button" id="minigame-catch-skip" class="minigame-btn minigame-btn-secondary">Skip</button>
+          <button type="button" id="minigame-catch-retry" class="minigame-btn">Retry</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Minigame: Frying timer -->
+    <div id="minigame-timer-overlay" class="minigame-overlay hidden" aria-hidden="true">
+      <div class="minigame-card">
+        <h3 class="minigame-title">Time the fry</h3>
+        <p id="minigame-timer-hint" class="minigame-timer-hint">Get ready...</p>
+        <div class="minigame-timer-wrap">
+          <div id="minigame-timer-bar" class="minigame-timer-bar"></div>
+          <div id="minigame-timer-zone" class="minigame-timer-zone"></div>
+        </div>
+        <div class="minigame-actions">
+          <button type="button" id="minigame-timer-hit" class="minigame-btn">Now!</button>
+          <button type="button" id="minigame-timer-skip" class="minigame-btn minigame-btn-secondary">Skip</button>
+          <button type="button" id="minigame-timer-retry" class="minigame-btn">Retry</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Minigame: Chop garlic -->
+    <div id="minigame-garlic-overlay" class="minigame-overlay hidden" aria-hidden="true">
+      <div class="minigame-card">
+        <h3 class="minigame-title">Chop the garlic</h3>
+        <p class="minigame-instruction">Tap \"Chop!\" as fast as you can before time runs out.</p>
+        <p id="minigame-garlic-progress" class="minigame-progress">Chops: 0 / 18 · Time: 5s</p>
+        <div class="minigame-actions">
+          <button type="button" id="minigame-garlic-chop" class="minigame-btn">Chop!</button>
+          <button type="button" id="minigame-garlic-skip" class="minigame-btn minigame-btn-secondary">Skip</button>
+          <button type="button" id="minigame-garlic-retry" class="minigame-btn">Retry</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Minigame: Mix the sauce -->
+    <div id="minigame-sauce-overlay" class="minigame-overlay hidden" aria-hidden="true">
+      <div class="minigame-card">
+        <h3 class="minigame-title">Mix the sauce</h3>
+        <p class="minigame-instruction">Tap in this order: Garlic → Basil → Chili.</p>
+        <p id="minigame-sauce-progress" class="minigame-progress">Step 1 of 3 · Mistakes: 0 / 2</p>
+        <div class="minigame-sauce-sequence" aria-hidden="true">
+          🧄 → 🌿 → 🌶️
+        </div>
+        <div class="minigame-sauce-buttons">
+          <button type="button" id="minigame-sauce-btn-garlic" class="minigame-btn minigame-sauce-btn">🧄 Garlic</button>
+          <button type="button" id="minigame-sauce-btn-basil" class="minigame-btn minigame-sauce-btn">🌿 Basil</button>
+          <button type="button" id="minigame-sauce-btn-chili" class="minigame-btn minigame-sauce-btn">🌶️ Chili</button>
+        </div>
+        <div class="minigame-actions">
+          <button type="button" id="minigame-sauce-skip" class="minigame-btn minigame-btn-secondary">Skip</button>
+          <button type="button" id="minigame-sauce-retry" class="minigame-btn">Retry</button>
+        </div>
+      </div>
+    </div>
+  </main>
+  <a href="https://ifunlove.com/" target="_blank" rel="noopener noreferrer" class="ifunlove-link ifunlove-link--bottom" aria-label="ifunlove — Playful Games, Art &amp; Design from Taiwan">ifunlove</a>
+
+  <script src="js/zzfx.js"></script>
+  <script src="js/characters.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/dialogue.js"></script>
+  <script src="js/scene.js"></script>
+  <script src="js/effects.js"></script>
+  <script src="js/bubbles.js"></script>
+  <script src="js/minigames/catch.js"></script>
+  <script src="js/minigames/timer.js"></script>
+   <script src="js/minigames/garlic.js"></script>
+   <script src="js/minigames/sauce.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

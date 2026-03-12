@@ -1,0 +1,253 @@
+/* Minigame overlays: fullscreen modal, play area, buttons */
+
+.minigame-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.88);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.minigame-overlay.minigame-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.minigame-overlay.minigame-visible .minigame-card {
+  animation: minigame-card-in 0.35s ease;
+}
+
+@keyframes minigame-card-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.minigame-card {
+  background: linear-gradient(180deg, rgba(40, 28, 26, 0.98) 0%, rgba(26, 20, 18, 0.98) 100%);
+  border: 1px solid rgba(255, 200, 150, 0.25);
+  border-radius: 12px;
+  padding: 1.25rem;
+  max-width: 100%;
+  width: 100%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+}
+
+/* Result feedback: play after success/fail before closing */
+.minigame-card--success {
+  animation: minigame-success 0.5s ease;
+}
+
+.minigame-card--fail {
+  animation: minigame-fail 0.5s ease;
+}
+
+@keyframes minigame-success {
+  0% { transform: scale(1); box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5); border-color: rgba(255, 200, 150, 0.25); }
+  25% { transform: scale(1.06); box-shadow: 0 0 32px rgba(120, 200, 120, 0.5); border-color: rgba(140, 220, 140, 0.6); }
+  50% { transform: scale(1.04); box-shadow: 0 0 24px rgba(100, 200, 100, 0.4); }
+  100% { transform: scale(1); box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5); border-color: rgba(255, 200, 150, 0.25); }
+}
+
+@keyframes minigame-fail {
+  0% { transform: translateX(0); }
+  12% { transform: translateX(-8px); }
+  25% { transform: translateX(8px); }
+  37% { transform: translateX(-6px); }
+  50% { transform: translateX(4px); }
+  62% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+  100% { transform: translateX(0); }
+}
+
+.minigame-card--fail {
+  box-shadow: 0 0 24px rgba(200, 80, 80, 0.35);
+  border-color: rgba(220, 100, 100, 0.5);
+}
+
+.minigame-title {
+  font-size: clamp(1.1rem, 4vw, 1.35rem);
+  color: #e8d4b8;
+  margin: 0 0 0.5rem;
+  text-align: center;
+}
+
+.minigame-instruction {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0 0 1rem;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.minigame-progress {
+  font-size: 0.95rem;
+  color: #c4a574;
+  margin-bottom: 0.75rem;
+}
+
+.minigame-timer-hint {
+  font-size: 0.85rem;
+  color: rgba(255, 220, 150, 0.9);
+  margin: 0 0 0.5rem;
+  min-height: 1.2em;
+}
+
+.minigame-timer-hint.minigame-hint-done {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Catch: play area and basket */
+.minigame-catch-area-wrap {
+  width: 100%;
+  max-width: 320px;
+  height: 280px;
+  position: relative;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#minigame-catch-area {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+#minigame-catch-basket {
+  position: absolute;
+  bottom: 12px;
+  left: 0;
+  width: 100px;
+  height: 48px;
+  background: rgba(196, 92, 62, 0.9);
+  border: 2px solid rgba(255, 220, 180, 0.5);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  transition: left 0.08s linear;
+  pointer-events: none;
+}
+
+.minigame-ingredient {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  margin-left: -15px;
+  font-size: 24px;
+  line-height: 30px;
+  text-align: center;
+  pointer-events: none;
+}
+
+.minigame-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.minigame-btn {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0.6rem 1.25rem;
+  font-size: 1rem;
+  background: #c45c3e;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.minigame-btn:hover {
+  background: #d46a4a;
+}
+
+.minigame-btn:active {
+  transform: scale(0.98);
+}
+
+.minigame-btn-secondary {
+  background: rgba(255, 255, 255, 0.15);
+  color: #f0e6dc;
+}
+
+.minigame-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Timer: bar and golden zone */
+.minigame-timer-wrap {
+  width: 100%;
+  max-width: 320px;
+  height: 48px;
+  position: relative;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.minigame-timer-zone {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 55%;
+  width: 37%;
+  background: rgba(255, 200, 80, 0.55);
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.minigame-timer-bar {
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 0%;
+  background: linear-gradient(90deg, #c45c3e, #e08050);
+  border-radius: 4px;
+  transition: width 0.05s linear;
+  pointer-events: none;
+}
+
+/* Sauce sequence layout */
+.minigame-sauce-sequence {
+  margin-top: 0.25rem;
+  font-size: 0.9rem;
+  color: rgba(255, 230, 190, 0.9);
+}
+
+.minigame-sauce-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.minigame-sauce-btn {
+  font-size: 0.9rem;
+}

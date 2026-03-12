@@ -1,0 +1,6 @@
+# Allow all crawlers; point to sitemap.
+# Replace https://example.com with your live site URL when deploying.
+User-agent: *
+Allow: /
+
+Sitemap: https://example.com/sitemap.xml
