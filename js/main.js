@@ -192,7 +192,13 @@
 
     if (typeof Dialogue !== 'undefined') {
       Dialogue.setOnClose(function (hotspotId) {
-        if (hotspotId === 'stall-buy') startEnding();
+        if (hotspotId === 'stall-buy') {
+          runBuyFlow();
+        } else if (hotspotId === 'garlic-pile') {
+          runGarlicMinigame();
+        } else if (hotspotId === 'sauce-bottles') {
+          runSauceMinigame();
+        }
       });
     }
   }
@@ -205,6 +211,7 @@
       titleOverlay.classList.add('hidden');
       gameViewport.classList.add('active');
       if (typeof SceneSetup !== 'undefined') SceneSetup.placeHotspots();
+      if (typeof Effects !== 'undefined') Effects.placeParticles();
       if (typeof AudioManager !== 'undefined') AudioManager.startAmbient();
       if (playerEl) {
         playerEl.classList.remove('Character--walk-left', 'Character--walk-right', 'Character--walk-up');
@@ -237,6 +244,30 @@
     }
   }
 
+  function runGarlicMinigame() {
+    if (typeof window.MinigameGarlic !== 'undefined') {
+      window.MinigameGarlic.open({ onComplete: function () {} });
+    }
+  }
+
+  function runSauceMinigame() {
+    if (typeof window.MinigameSauce !== 'undefined') {
+      window.MinigameSauce.open({ onComplete: function () {} });
+    }
+  }
+
+  function runBuyFlow() {
+    if (typeof window.MinigameCatch !== 'undefined') {
+      window.MinigameCatch.open({
+        onComplete: function () {
+          startEnding();
+        }
+      });
+    } else {
+      startEnding();
+    }
+  }
+
   function startEnding() {
     var gameEl = document.getElementById('game-viewport');
     var endingEl = document.getElementById('ending-overlay');
@@ -244,11 +275,12 @@
     if (!endingEl || !contentEl) return;
     if (gameEl) gameEl.classList.remove('active');
     endingEl.classList.remove('hidden');
+    var name = (typeof window.playerName !== 'undefined' && window.playerName) ? window.playerName : 'Traveler';
     contentEl.innerHTML =
       '<p class="ending-title">2:03 AM</p>' +
-      '<p>You take the warm bag. The travelers gather around — from Iceland, Mongolia, Bhutan, Madagascar, Paraguay, Slovenia, Namibia, Albania, Greenland, Bolivia. One by one they try a piece.</p>' +
+      '<p>' + name + ', you take the warm bag. The travelers gather around — from Iceland, Mongolia, Bhutan, Madagascar, Paraguay, Slovenia, Namibia, Albania, Greenland, Bolivia. One by one they try a piece.</p>' +
       '<p>First confusion. Then nods. Then smiles.</p>' +
-      '<p>This is Taiwan\'s late-night culture. Friends, garlic, and a paper bag of fried chicken under the lanterns.</p>' +
+      '<p>This is Taiwan\'s late-night culture. Friends, garlic, and a paper bag of fried chicken under the lanterns. Everyone gets it now.</p>' +
       '<p><button type="button" id="ending-back-btn" class="ending-back-btn">Back to street</button></p>';
     var backBtn = document.getElementById('ending-back-btn');
     if (backBtn) backBtn.addEventListener('click', backToGame);

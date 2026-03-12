@@ -680,3 +680,31 @@ html, body {
 #ending-content .ending-back-btn:hover {
   background: #d46a4a;
 }
+
+/* ---- Scene effects (steam, glow) ---- */
+#scene .effect {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+}
+.effect-steam.effect-oil {
+  width: 60px;
+  height: 40px;
+  background: radial-gradient(ellipse at 50% 100%, rgba(255, 255, 255, 0.25) 0%, transparent 70%);
+  animation: steam-rise 2.5s ease-in-out infinite;
+}
+.effect-glow.effect-lantern {
+  width: 80px;
+  height: 60px;
+  border-radius: 50%;
+  box-shadow: 0 0 40px 20px rgba(255, 180, 80, 0.2);
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+@keyframes steam-rise {
+  0%, 100% { opacity: 0.4; transform: translateY(0) scale(1); }
+  50% { opacity: 0.7; transform: translateY(-8px) scale(1.05); }
+}
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}

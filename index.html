@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>2:03 AM — Taiwanese Popcorn Chicken</title>
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/minigames.css" />
 </head>
 <body>
   <div id="app">
@@ -75,12 +76,87 @@
     <div id="ending-overlay" class="hidden">
       <div id="ending-content"></div>
     </div>
+
+    <!-- Minigame: Catch ingredients -->
+    <div id="minigame-catch-overlay" class="minigame-overlay hidden" aria-hidden="true">
+      <div class="minigame-card">
+        <h3 class="minigame-title">Catch the ingredients</h3>
+        <p class="minigame-instruction">Use ← → or tap left/right side to move the basket.</p>
+        <p id="minigame-catch-progress" class="minigame-progress">Caught: 0 / 3 · Missed: 0 / 6</p>
+        <div class="minigame-catch-area-wrap">
+          <div id="minigame-catch-area">
+            <div id="minigame-catch-basket" aria-hidden="true">🧺</div>
+          </div>
+        </div>
+        <div class="minigame-actions">
+          <button type="button" id="minigame-catch-skip" class="minigame-btn minigame-btn-secondary">Skip</button>
+          <button type="button" id="minigame-catch-retry" class="minigame-btn">Retry</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Minigame: Frying timer -->
+    <div id="minigame-timer-overlay" class="minigame-overlay hidden" aria-hidden="true">
+      <div class="minigame-card">
+        <h3 class="minigame-title">Time the fry</h3>
+        <p id="minigame-timer-hint" class="minigame-timer-hint">Get ready...</p>
+        <div class="minigame-timer-wrap">
+          <div id="minigame-timer-bar" class="minigame-timer-bar"></div>
+          <div id="minigame-timer-zone" class="minigame-timer-zone"></div>
+        </div>
+        <div class="minigame-actions">
+          <button type="button" id="minigame-timer-hit" class="minigame-btn">Now!</button>
+          <button type="button" id="minigame-timer-skip" class="minigame-btn minigame-btn-secondary">Skip</button>
+          <button type="button" id="minigame-timer-retry" class="minigame-btn">Retry</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Minigame: Chop garlic -->
+    <div id="minigame-garlic-overlay" class="minigame-overlay hidden" aria-hidden="true">
+      <div class="minigame-card">
+        <h3 class="minigame-title">Chop the garlic</h3>
+        <p class="minigame-instruction">Tap \"Chop!\" as fast as you can before time runs out.</p>
+        <p id="minigame-garlic-progress" class="minigame-progress">Chops: 0 / 18 · Time: 5s</p>
+        <div class="minigame-actions">
+          <button type="button" id="minigame-garlic-chop" class="minigame-btn">Chop!</button>
+          <button type="button" id="minigame-garlic-skip" class="minigame-btn minigame-btn-secondary">Skip</button>
+          <button type="button" id="minigame-garlic-retry" class="minigame-btn">Retry</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Minigame: Mix the sauce -->
+    <div id="minigame-sauce-overlay" class="minigame-overlay hidden" aria-hidden="true">
+      <div class="minigame-card">
+        <h3 class="minigame-title">Mix the sauce</h3>
+        <p class="minigame-instruction">Tap in this order: Garlic → Basil → Chili.</p>
+        <p id="minigame-sauce-progress" class="minigame-progress">Step 1 of 3 · Mistakes: 0 / 2</p>
+        <div class="minigame-sauce-sequence" aria-hidden="true">
+          🧄 → 🌿 → 🌶️
+        </div>
+        <div class="minigame-sauce-buttons">
+          <button type="button" id="minigame-sauce-btn-garlic" class="minigame-btn minigame-sauce-btn">🧄 Garlic</button>
+          <button type="button" id="minigame-sauce-btn-basil" class="minigame-btn minigame-sauce-btn">🌿 Basil</button>
+          <button type="button" id="minigame-sauce-btn-chili" class="minigame-btn minigame-sauce-btn">🌶️ Chili</button>
+        </div>
+        <div class="minigame-actions">
+          <button type="button" id="minigame-sauce-skip" class="minigame-btn minigame-btn-secondary">Skip</button>
+          <button type="button" id="minigame-sauce-retry" class="minigame-btn">Retry</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script src="js/characters.js"></script>
   <script src="js/audio.js"></script>
   <script src="js/dialogue.js"></script>
   <script src="js/scene.js"></script>
+  <script src="js/effects.js"></script>
+  <script src="js/minigames/catch.js"></script>
+  <script src="js/minigames/timer.js"></script>
+   <script src="js/minigames/garlic.js"></script>
+   <script src="js/minigames/sauce.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
