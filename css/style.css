@@ -25,6 +25,99 @@ html, body {
   display: none !important;
 }
 
+/* ---- Name overlay (Welcome + enter name, CodePen-style opening) ---- */
+.welcome-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 101;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at 50% 30%, #2a1a1a 0%, #0d0d12 60%);
+  padding: 2rem;
+  transition: opacity 0.5s ease;
+}
+.welcome-overlay.slide-out {
+  opacity: 0;
+  pointer-events: none;
+}
+.welcome-overlay.slide-out .welcome-modal {
+  transform: translateX(-120%);
+}
+.welcome-modal {
+  background: rgba(255, 252, 248, 0.06);
+  border: 1px solid rgba(255, 220, 180, 0.25);
+  border-radius: 12px;
+  padding: 2.5rem 2rem;
+  max-width: 22rem;
+  width: 100%;
+  text-align: center;
+  transition: transform 0.5s ease;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+.welcome-modal__label {
+  font-size: 0.9rem;
+  letter-spacing: 0.15em;
+  color: #c4ebfd;
+  margin: 0 0 0.25rem;
+  text-transform: uppercase;
+}
+.welcome-modal__title {
+  font-size: clamp(1.8rem, 6vw, 2.5rem);
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  color: #f5e6d3;
+  margin: 0 0 1rem;
+}
+.welcome-modal__hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,220,180,0.3), transparent);
+  margin: 0 0 1.5rem;
+}
+.welcome-modal__prompt {
+  font-size: 1rem;
+  font-weight: normal;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0 0 1rem;
+}
+.welcome-modal #name-input {
+  display: block;
+  width: 100%;
+  max-width: 16rem;
+  margin: 0 auto 1.5rem;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  color: #f0e6dc;
+  background: rgba(0, 0, 0, 0.35);
+  border: 2px solid rgba(255, 220, 180, 0.35);
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.welcome-modal #name-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+.welcome-modal #name-input:focus {
+  border-color: rgba(196, 92, 62, 0.8);
+}
+.welcome-modal #name-input.error {
+  border-color: #c45c3e;
+}
+.welcome-modal__btn {
+  padding: 0.6rem 1.8rem;
+  font-size: 1rem;
+  background: #c45c3e;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.welcome-modal__btn:hover {
+  background: #d46a4a;
+}
+
 /* ---- Title overlay ---- */
 #title-overlay {
   position: fixed;
@@ -40,6 +133,13 @@ html, body {
   transition: opacity 0.8s ease;
 }
 
+#title-overlay.intro-visible {
+  animation: introFadeIn 0.4s ease;
+}
+@keyframes introFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 #title-overlay.fade-out {
   opacity: 0;
   pointer-events: none;
@@ -213,7 +313,8 @@ html, body {
   position: absolute;
   left: 0;
   top: 0;
-  width: 100%;
+  min-width: 3000px;
+  width: 3000px;
   height: 100%;
   min-height: 100%;
   will-change: transform;

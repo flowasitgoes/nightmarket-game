@@ -5,11 +5,15 @@
   'use strict';
 
   var gameViewport = null;
+  var nameOverlay = null;
+  var nameInput = null;
+  var btnNameNext = null;
   var titleOverlay = null;
   var btnStart = null;
   var btnLeft = null;
   var btnRight = null;
   var scrollStep = 280;
+  var playerName = 'Traveler';
   var visitedHotspots = new Set();
   var idleTimeout = null;
   var playerEl = null;
@@ -79,8 +83,35 @@
     setTimeout(dismiss, 5000);
   }
 
+  function goToIntro() {
+    var raw = (nameInput && nameInput.value) ? nameInput.value.trim() : '';
+    if (raw.length === 0) {
+      if (nameInput) {
+        nameInput.classList.add('error');
+        nameInput.placeholder = 'Enter your name';
+        nameInput.focus();
+      }
+      return;
+    }
+    if (nameInput) nameInput.classList.remove('error');
+    playerName = raw;
+    window.playerName = playerName;
+    if (typeof AudioManager !== 'undefined') AudioManager.playClick();
+    if (nameOverlay) nameOverlay.classList.add('slide-out');
+    setTimeout(function () {
+      if (nameOverlay) nameOverlay.classList.add('hidden');
+      if (titleOverlay) {
+        titleOverlay.classList.remove('hidden');
+        titleOverlay.classList.add('intro-visible');
+      }
+    }, 500);
+  }
+
   function init() {
     gameViewport = document.getElementById('game-viewport');
+    nameOverlay = document.getElementById('name-overlay');
+    nameInput = document.getElementById('name-input');
+    btnNameNext = document.getElementById('btn-name-next');
     titleOverlay = document.getElementById('title-overlay');
     btnStart = document.getElementById('btn-start');
     btnLeft = document.getElementById('btn-left');
@@ -90,6 +121,14 @@
 
     var viewportWidth = document.getElementById('scene-container').offsetWidth;
     Scene.init(viewportWidth);
+
+    if (btnNameNext) btnNameNext.addEventListener('click', goToIntro);
+    if (nameInput) {
+      nameInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') { e.preventDefault(); goToIntro(); }
+      });
+      nameInput.addEventListener('input', function () { nameInput.classList.remove('error'); });
+    }
 
     btnStart.addEventListener('click', startGame);
     btnLeft.addEventListener('click', function () {
@@ -177,9 +216,11 @@
         function measureAndInit() {
           var w = container.offsetWidth;
           Scene.init(w);
+          Scene.setScroll(0);
         }
         measureAndInit();
         requestAnimationFrame(measureAndInit);
+        setTimeout(measureAndInit, 100);
       }
       setTimeout(showControlsHint, 400);
     }, 900);

@@ -21,11 +21,11 @@ window.CHARACTERS = {
  * Hotspot positions. Use `flag` for travelers (emoji), `icon` for env (emoji or short text).
  */
 window.HOTSPOT_CONFIG = [
-  { id: 'stall',            left: 80,   top: '35%', width: 200, height: 180, label: 'Fried chicken stall', icon: '🍗' },
-  { id: 'stall-buy',        left: 220,  top: '55%', width: 100, height: 50,  label: 'Buy a bag',           icon: '🛒' },
-  { id: 'oil-pot',          left: 120,  top: '42%', width: 80,  height: 70,  label: 'Oil pot',             icon: '🍳' },
-  { id: 'lantern',          left: 320,  top: '15%', width: 60,  height: 90,  label: 'Lantern',             icon: '🏮' },
-  { id: 'basil',            left: 180,  top: '48%', width: 70,  height: 50,  label: 'Basil leaves',        icon: '🌿' },
+  { id: 'stall',            left: 120,  top: '35%', width: 200, height: 180, label: 'Fried chicken stall', icon: '🍗' },
+  { id: 'stall-buy',        left: 260,  top: '55%', width: 100, height: 50,  label: 'Buy a bag',           icon: '🛒' },
+  { id: 'oil-pot',          left: 30,   top: '42%', width: 80,  height: 70,  label: 'Oil pot',             icon: '🍳' },
+  { id: 'lantern',          left: 360,  top: '15%', width: 60,  height: 90,  label: 'Lantern',             icon: '🏮' },
+  { id: 'basil',            left: 220,  top: '48%', width: 70,  height: 50,  label: 'Basil leaves',        icon: '🌿' },
   { id: 'traveler-iceland',     left: 520,  top: '45%', width: 90,  height: 140, label: 'Traveler from Iceland',     flag: '🇮🇸' },
   { id: 'traveler-mongolia',    left: 720,  top: '42%', width: 90,  height: 140, label: 'Traveler from Mongolia',    flag: '🇲🇳' },
   { id: 'traveler-bhutan',      left: 920,  top: '48%', width: 90,  height: 140, label: 'Traveler from Bhutan',      flag: '🇧🇹' },
