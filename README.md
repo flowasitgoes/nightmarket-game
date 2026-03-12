@@ -46,6 +46,17 @@ For a curated list of free game assets (itch.io, OpenGameArt, Kenney, いらす�
 
 Use and modify as you like. If you publish on itch.io, credit is appreciated.
 
+## SEO (when deploying to your own domain)
+
+1. **Replace placeholder URLs** in these files with your live site URL (e.g. `https://yoursite.com`):
+   - `index.html`: `<link rel="canonical">`, `og:image`, `og:url`, `twitter:image`, and the JSON-LD `url` / `image`.
+   - `robots.txt`: `Sitemap:` URL.
+   - `sitemap.xml`: `<loc>` URL and optionally `<lastmod>`.
+
+2. **Submit** `https://yoursite.com/sitemap.xml` in Google Search Console and Bing Webmaster Tools.
+
+3. **Test** sharing on Facebook (Sharing Debugger) or Twitter (Card Validator) to confirm OG/Twitter images and titles.
+
 **Asset credits (this build):**  
 - Street background: [Pixel Art Street Backgrounds](https://opengameart.org/content/pixel-art-street-backgrounds) by CraftPix on OpenGameArt.org (OGA-BY 3.0).  
 - UI arrows & click sound: [Kenney UI Pack](https://kenney.nl/assets/ui-pack) (CC0).  

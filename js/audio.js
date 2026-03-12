@@ -64,6 +64,8 @@
 
   function playClick() {
     if (muted) return;
+    var ctx = getAudioCtx();
+    if (ctx && ctx.state === 'suspended') ctx.resume().catch(function () {});
     setZzfxVolume();
     if (typeof window.zzfx === 'function') {
       try {

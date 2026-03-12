@@ -6,6 +6,7 @@
 
   var gameViewport = null;
   var nameOverlay = null;
+  var nameInput = null;
   var btnNameNext = null;
   var titleOverlay = null;
   var btnStart = null;
@@ -13,6 +14,11 @@
   var btnRight = null;
   var btnJump = null;
   var scrollStep = 280;
+  /** 仿平台遊戲：按住鍵時每幀加的速度（px/frame） */
+  var scrollAccel = 0.9;
+  /** 鍵盤左右鍵狀態，用於連續移動 */
+  var moveKeys = { left: false, right: false };
+  var gameLoopId = null;
   var isJumping = false;
   var playerName = 'Traveler';
   var visitedHotspots = new Set();
@@ -97,9 +103,12 @@
   }
 
   function goToIntro() {
-    playerName = 'Traveler';
-    window.playerName = playerName;
     if (typeof AudioManager !== 'undefined') AudioManager.playClick();
+    var raw = (nameInput && nameInput.value) ? nameInput.value.trim() : '';
+    if (raw.length === 0) raw = 'COOL';
+    if (nameInput) nameInput.classList.remove('error');
+    playerName = raw;
+    window.playerName = playerName;
     if (nameOverlay) nameOverlay.classList.add('slide-out');
     setTimeout(function () {
       if (nameOverlay) nameOverlay.classList.add('hidden');
@@ -113,6 +122,7 @@
   function init() {
     gameViewport = document.getElementById('game-viewport');
     nameOverlay = document.getElementById('name-overlay');
+    nameInput = document.getElementById('name-input');
     btnNameNext = document.getElementById('btn-name-next');
     titleOverlay = document.getElementById('title-overlay');
     btnStart = document.getElementById('btn-start');
@@ -126,27 +136,50 @@
     Scene.init(viewportWidth);
 
     if (btnNameNext) btnNameNext.addEventListener('click', goToIntro);
+    if (nameInput) {
+      nameInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') { e.preventDefault(); goToIntro(); }
+      });
+      nameInput.addEventListener('input', function () { nameInput.classList.remove('error'); });
+    }
 
     btnStart.addEventListener('click', startGame);
     btnLeft.addEventListener('click', function () {
-      Scene.moveBy(-scrollStep);
-      setPlayerDirection('left');
+      if (typeof Scene.addMomentum === 'function') {
+        Scene.addMomentum(-6);
+        setPlayerDirection('left');
+      } else {
+        Scene.moveBy(-scrollStep);
+        setPlayerDirection('left');
+      }
     });
     btnRight.addEventListener('click', function () {
-      Scene.moveBy(scrollStep);
-      setPlayerDirection('right');
+      if (typeof Scene.addMomentum === 'function') {
+        Scene.addMomentum(6);
+        setPlayerDirection('right');
+      } else {
+        Scene.moveBy(scrollStep);
+        setPlayerDirection('right');
+      }
     });
     if (btnJump) btnJump.addEventListener('click', function () { doJump(); });
+
+    var btnMobileUp = document.getElementById('btn-mobile-up');
+
+    if (btnMobileUp) btnMobileUp.addEventListener('click', function () {
+      cyclePlayerSprite(-1);
+      if (typeof AudioManager !== 'undefined') AudioManager.playChangeUp();
+    });
 
     document.addEventListener('keydown', function (e) {
       if (!gameViewport || !gameViewport.classList.contains('active')) return;
       if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
         e.preventDefault();
-        Scene.moveBy(-scrollStep);
+        moveKeys.left = true;
         setPlayerDirection('left');
       } else if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
         e.preventDefault();
-        Scene.moveBy(scrollStep);
+        moveKeys.right = true;
         setPlayerDirection('right');
       } else if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') {
         e.preventDefault();
@@ -160,6 +193,11 @@
         e.preventDefault();
         doJump();
       }
+    });
+
+    document.addEventListener('keyup', function (e) {
+      if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') moveKeys.left = false;
+      if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') moveKeys.right = false;
     });
 
     window.addEventListener('resize', function () {
@@ -204,6 +242,18 @@
         }
       });
     }
+
+    gameLoop();
+  }
+
+  /** 仿平台遊戲的每幀更新：依按鍵加速度、Scene 慣性、更新角色朝向 */
+  function gameLoop() {
+    gameLoopId = requestAnimationFrame(gameLoop);
+    if (!gameViewport || !gameViewport.classList.contains('active')) return;
+    if (typeof Scene.tick !== 'function') return;
+    if (moveKeys.left) Scene.addMomentum(-scrollAccel);
+    if (moveKeys.right) Scene.addMomentum(scrollAccel);
+    Scene.tick();
   }
 
   function startGame() {
@@ -222,8 +272,8 @@
         playerEl.classList.remove('Character--walk-left', 'Character--walk-right', 'Character--walk-up');
         playerEl.classList.add('Character--walk-down', 'idle');
       }
-      window.__SCENE_DEBUG = true;
-      console.log('[Debug] 場景捲動已開啟 — 按 ← / → 會在 console 顯示 scroll 與邊界。輸入 Scene.debug() 可看目前狀態，Scene.debug(false) 關閉 log。');
+      window.__SCENE_DEBUG = false;
+      console.log('[Debug] 場景捲動已開啟 — 按住 ← / → 或 A / D 可平滑移動（慣性）。按鈕會給予一段速度。');
       var tvFrame = document.getElementById('game-tv-frame');
       if (tvFrame) tvFrame.classList.add('tv-frame--on');
       var gameVideo = document.getElementById('game-video-player');

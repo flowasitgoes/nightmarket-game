@@ -9,7 +9,11 @@
   var CONTENT_WIDTH = 3000;
   var VIEWPORT_WIDTH = 0;
   var currentScroll = 0;
+  /** 水平捲動速度（px/ frame），用於慣性平滑移動 */
+  var scrollSpeed = 0;
   var sceneEl = null;
+  var FRICTION = 0.88;
+  var MAX_SPEED = 14;
 
   function init(viewportWidth) {
     VIEWPORT_WIDTH = Math.max(0, viewportWidth);
@@ -35,6 +39,7 @@
     var maxScroll = Math.max(0, CONTENT_WIDTH - safeViewport);
     var prevScroll = currentScroll;
     currentScroll = Math.max(0, Math.min(maxScroll, Math.round(x)));
+    scrollSpeed = 0;
     if (sceneEl) sceneEl.style.transform = 'translateX(-' + currentScroll + 'px)';
     if (window.__SCENE_DEBUG) {
       console.log('[Scene.setScroll]', {
@@ -71,6 +76,35 @@
       if (delta > 0 && atRight) console.warn('[Scene] 已經在最右邊，無法再往右。');
     }
     return setScroll(currentScroll + delta);
+  }
+
+  /**
+   * 每幀加入水平速度（按住鍵時由 main 呼叫，仿平台遊戲的 Player.walk）
+   * @param {number} delta - 本幀要加的速度，正=往右、負=往左
+   */
+  function addMomentum(delta) {
+    scrollSpeed += delta;
+    if (scrollSpeed > MAX_SPEED) scrollSpeed = MAX_SPEED;
+    if (scrollSpeed < -MAX_SPEED) scrollSpeed = -MAX_SPEED;
+  }
+
+  /**
+   * 每幀更新：摩擦力、位移、邊界 clamp（仿平台遊戲的 updateX + 邊界）
+   */
+  function tick() {
+    var safeViewport = Math.max(1, VIEWPORT_WIDTH);
+    var maxScroll = Math.max(0, CONTENT_WIDTH - safeViewport);
+    scrollSpeed *= FRICTION;
+    currentScroll += scrollSpeed;
+    if (currentScroll <= 0) {
+      currentScroll = 0;
+      scrollSpeed = 0;
+    }
+    if (currentScroll >= maxScroll) {
+      currentScroll = maxScroll;
+      scrollSpeed = 0;
+    }
+    if (sceneEl) sceneEl.style.transform = 'translateX(-' + Math.round(currentScroll) + 'px)';
   }
 
   function getSceneWidth() {
@@ -125,6 +159,8 @@
     setScroll: setScroll,
     getScroll: getScroll,
     moveBy: moveBy,
+    addMomentum: addMomentum,
+    tick: tick,
     getSceneWidth: getSceneWidth,
     getViewportWidth: getViewportWidth,
     addHotspot: addHotspot,
