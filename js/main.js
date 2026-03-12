@@ -231,6 +231,8 @@
       gameViewport.classList.add('active');
       if (typeof SceneSetup !== 'undefined') SceneSetup.placeHotspots();
       if (typeof Effects !== 'undefined') Effects.placeParticles();
+      var sceneContainer = document.getElementById('scene-container');
+      if (sceneContainer && typeof BubblesEffect !== 'undefined') BubblesEffect.init(sceneContainer);
       if (typeof AudioManager !== 'undefined') AudioManager.startAmbient();
       if (playerEl) {
         playerEl.classList.remove('Character--walk-left', 'Character--walk-right', 'Character--walk-up');
