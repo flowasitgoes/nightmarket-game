@@ -45,6 +45,7 @@ html, body {
 }
 .ifunlove-link--bottom {
   bottom: 0.5rem;
+  text-decoration: underline;
 }
 
 /* ---- Name overlay (Welcome, no name input) ---- */
@@ -349,18 +350,20 @@ html, body {
 #game-hud {
   position: absolute;
   bottom: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
+  right: 1rem;
+  left: auto;
+  transform: none;
   z-index: 20;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
   gap: 0.25rem;
   padding: 0.5rem 1rem;
   background: rgba(0,0,0,0.5);
   border-radius: 8px;
   border: 1px solid rgba(255,255,255,0.1);
   font-size: 0.85rem;
+  text-align: right;
 }
 
 #progress-text {
@@ -541,6 +544,10 @@ html, body {
   color: #f0e6dc;
   cursor: pointer;
   transition: background-color 0.2s;
+  display: none; /* hidden on desktop */
+}
+#btn-jump .btn-jump-icon-desktop {
+  display: none;
 }
 #btn-jump:hover {
   background-color: rgba(0,0,0,0.5);
@@ -566,6 +573,11 @@ html, body {
   }
   #game-hud {
     bottom: calc(1rem + 40px);
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    align-items: center;
+    text-align: center;
   }
   #btn-left, #btn-right {
     top: auto;
@@ -605,6 +617,7 @@ html, body {
     transform: rotate(-90deg);
   }
   #btn-jump {
+    display: block; /* only show on mobile */
     left: 0.5rem;
     bottom: calc(10% - 3.5rem - 0.35rem);
     transform: none;
