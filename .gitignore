@@ -1,0 +1,4 @@
+# Large video files (use YouTube embed instead for git push)
+assets/video/
+**/videoplayback.mp4
+**/game-video.mp4
