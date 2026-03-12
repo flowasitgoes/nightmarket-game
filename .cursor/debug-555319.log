@@ -1,0 +1,89 @@
+{"sessionId":"555319","hypothesisId":"H2","location":"scene.js:init","message":"init bounds","data":{"CONTENT_WIDTH":3000,"VIEWPORT_WIDTH":0,"maxScroll":2999}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":0,"prevScroll":0,"currentScroll":0,"maxScroll":2999,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H2","location":"scene.js:init","message":"init bounds","data":{"CONTENT_WIDTH":3000,"VIEWPORT_WIDTH":1580,"maxScroll":1420}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":0,"prevScroll":0,"currentScroll":0,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":0,"prevScroll":0,"currentScroll":0,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H2","location":"scene.js:init","message":"init bounds","data":{"CONTENT_WIDTH":3000,"VIEWPORT_WIDTH":1580,"maxScroll":1420}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":-280,"currentScrollBefore":0,"willBe":-280}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":-280,"prevScroll":0,"currentScroll":-280,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":0,"prevScroll":0,"currentScroll":0,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":0,"prevScroll":0,"currentScroll":0,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H2","location":"scene.js:init","message":"init bounds","data":{"CONTENT_WIDTH":3000,"VIEWPORT_WIDTH":1580,"maxScroll":1420}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":-280,"prevScroll":-280,"currentScroll":-280,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":0,"prevScroll":-280,"currentScroll":0,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":-280,"currentScrollBefore":0,"willBe":-280}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":-280,"prevScroll":0,"currentScroll":-280,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":-280,"currentScrollBefore":-280,"willBe":-560}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":-560,"prevScroll":-280,"currentScroll":-500,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":true}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":-280,"currentScrollBefore":-500,"willBe":-780}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":-780,"prevScroll":-500,"currentScroll":-500,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":true}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":-280,"currentScrollBefore":-500,"willBe":-780}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":-780,"prevScroll":-500,"currentScroll":-500,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":true}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":-280,"currentScrollBefore":-500,"willBe":-780}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":-780,"prevScroll":-500,"currentScroll":-500,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":true}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":-280,"currentScrollBefore":-500,"willBe":-780}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":-780,"prevScroll":-500,"currentScroll":-500,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":true}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":-280,"currentScrollBefore":-500,"willBe":-780}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":-780,"prevScroll":-500,"currentScroll":-500,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":true}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":-280,"currentScrollBefore":-500,"willBe":-780}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":-780,"prevScroll":-500,"currentScroll":-500,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":true}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":280,"currentScrollBefore":-500,"willBe":-220}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":-220,"prevScroll":-500,"currentScroll":-220,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":280,"currentScrollBefore":-220,"willBe":60}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":60,"prevScroll":-220,"currentScroll":60,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":280,"currentScrollBefore":60,"willBe":340}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":340,"prevScroll":60,"currentScroll":340,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":280,"currentScrollBefore":340,"willBe":620}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":620,"prevScroll":340,"currentScroll":620,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":280,"currentScrollBefore":620,"willBe":900}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":900,"prevScroll":620,"currentScroll":900,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":280,"currentScrollBefore":900,"willBe":1180}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":1180,"prevScroll":900,"currentScroll":1180,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":280,"currentScrollBefore":1180,"willBe":1460}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":1460,"prevScroll":1180,"currentScroll":1420,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":280,"currentScrollBefore":1420,"willBe":1700}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":1700,"prevScroll":1420,"currentScroll":1420,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":280,"currentScrollBefore":1420,"willBe":1700}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":1700,"prevScroll":1420,"currentScroll":1420,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":280,"currentScrollBefore":1420,"willBe":1700}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":1700,"prevScroll":1420,"currentScroll":1420,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":280,"currentScrollBefore":1420,"willBe":1700}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":1700,"prevScroll":1420,"currentScroll":1420,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":280,"currentScrollBefore":1420,"willBe":1700}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":1700,"prevScroll":1420,"currentScroll":1420,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":280,"currentScrollBefore":1420,"willBe":1700}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":1700,"prevScroll":1420,"currentScroll":1420,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":280,"currentScrollBefore":1420,"willBe":1700}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":1700,"prevScroll":1420,"currentScroll":1420,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":280,"currentScrollBefore":1420,"willBe":1700}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":1700,"prevScroll":1420,"currentScroll":1420,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":280,"currentScrollBefore":1420,"willBe":1700}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":1700,"prevScroll":1420,"currentScroll":1420,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":280,"currentScrollBefore":1420,"willBe":1700}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":1700,"prevScroll":1420,"currentScroll":1420,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":280,"currentScrollBefore":1420,"willBe":1700}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":1700,"prevScroll":1420,"currentScroll":1420,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":280,"currentScrollBefore":1420,"willBe":1700}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":1700,"prevScroll":1420,"currentScroll":1420,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":280,"currentScrollBefore":1420,"willBe":1700}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":1700,"prevScroll":1420,"currentScroll":1420,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":-280,"currentScrollBefore":1420,"willBe":1140}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":1140,"prevScroll":1420,"currentScroll":1140,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":-280,"currentScrollBefore":1140,"willBe":860}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":860,"prevScroll":1140,"currentScroll":860,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":-280,"currentScrollBefore":860,"willBe":580}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":580,"prevScroll":860,"currentScroll":580,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":-280,"currentScrollBefore":580,"willBe":300}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":300,"prevScroll":580,"currentScroll":300,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":-280,"currentScrollBefore":300,"willBe":20}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":20,"prevScroll":300,"currentScroll":20,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":-280,"currentScrollBefore":20,"willBe":-260}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":-260,"prevScroll":20,"currentScroll":-260,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":false}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":-280,"currentScrollBefore":-260,"willBe":-540}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":-540,"prevScroll":-260,"currentScroll":-500,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":true}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":-280,"currentScrollBefore":-500,"willBe":-780}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":-780,"prevScroll":-500,"currentScroll":-500,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":true}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":-280,"currentScrollBefore":-500,"willBe":-780}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":-780,"prevScroll":-500,"currentScroll":-500,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":true}}
+{"sessionId":"555319","hypothesisId":"H4","location":"scene.js:moveBy","message":"moveBy","data":{"delta":-280,"currentScrollBefore":-500,"willBe":-780}}
+{"sessionId":"555319","hypothesisId":"H1","location":"scene.js:setScroll","message":"setScroll clamp","data":{"input":-780,"prevScroll":-500,"currentScroll":-500,"maxScroll":1420,"minScroll":-500,"clampedAtLeft":true}}

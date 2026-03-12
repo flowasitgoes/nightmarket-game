@@ -11,14 +11,150 @@
   var animationId = null;
   var viewportEl = null;
   var gradient = null;
+  var currentThemeKey = null;
+  var themeGradient = null;
+  var themeTimeoutId = null;
+
+  var DEFAULT_COLOR_STOPS = [
+    [0, 'rgba(255,255,255,0.95)'],
+    [0.5, 'rgba(255, 220, 180, 0.9)'],
+    [1, 'rgba(196, 92, 62, 0.85)']
+  ];
+
+  var BUBBLE_THEMES = {
+    basil: [
+      [0, 'rgba(240,255,240,0.95)'],
+      [0.4, 'rgba(144,238,144,0.9)'],
+      [0.8, 'rgba(34,139,34,0.9)'],
+      [1, 'rgba(0,100,0,0.85)']
+    ],
+    'oil-pot': [
+      [0, 'rgba(255,250,240,0.95)'],
+      [0.5, 'rgba(255,215,0,0.85)'],
+      [1, 'rgba(218,165,32,0.9)']
+    ],
+    'garlic-pile': [
+      [0, 'rgba(255,255,255,0.95)'],
+      [0.5, 'rgba(248,248,255,0.9)'],
+      [1, 'rgba(216,191,216,0.85)']
+    ],
+    'sauce-bottles': [
+      [0, 'rgba(255,240,245,0.95)'],
+      [0.4, 'rgba(255,99,71,0.9)'],
+      [1, 'rgba(178,34,34,0.85)']
+    ],
+    lantern: [
+      [0, 'rgba(255,255,220,0.95)'],
+      [0.5, 'rgba(255,200,100,0.9)'],
+      [1, 'rgba(255,140,0,0.85)']
+    ],
+    stall: [
+      [0, 'rgba(255,248,240,0.95)'],
+      [0.5, 'rgba(255,218,185,0.9)'],
+      [1, 'rgba(210,105,30,0.85)']
+    ],
+    'stall-buy': [
+      [0, 'rgba(255,250,245,0.95)'],
+      [0.5, 'rgba(255,160,122,0.9)'],
+      [1, 'rgba(220,20,60,0.85)']
+    ],
+    'traveler-iceland': [
+      [0, 'rgba(255,255,255,0.95)'],
+      [0.4, 'rgba(175,238,238,0.9)'],
+      [0.8, 'rgba(0,206,209,0.9)'],
+      [1, 'rgba(0,139,139,0.85)']
+    ],
+    'traveler-mongolia': [
+      [0, 'rgba(255,250,240,0.95)'],
+      [0.4, 'rgba(210,180,140,0.9)'],
+      [0.8, 'rgba(139,119,101,0.9)'],
+      [1, 'rgba(101,67,33,0.85)']
+    ],
+    'traveler-bhutan': [
+      [0, 'rgba(255,248,240,0.95)'],
+      [0.4, 'rgba(255,165,79,0.9)'],
+      [0.8, 'rgba(255,99,71,0.9)'],
+      [1, 'rgba(178,34,34,0.85)']
+    ],
+    'traveler-madagascar': [
+      [0, 'rgba(255,255,240,0.95)'],
+      [0.4, 'rgba(255,215,0,0.9)'],
+      [0.8, 'rgba(189,183,107,0.9)'],
+      [1, 'rgba(107,142,35,0.85)']
+    ],
+    'traveler-paraguay': [
+      [0, 'rgba(240,255,240,0.95)'],
+      [0.4, 'rgba(154,205,50,0.9)'],
+      [0.8, 'rgba(34,139,34,0.9)'],
+      [1, 'rgba(0,100,0,0.85)']
+    ],
+    'traveler-slovenia': [
+      [0, 'rgba(255,255,255,0.95)'],
+      [0.4, 'rgba(173,216,230,0.9)'],
+      [0.8, 'rgba(135,206,235,0.9)'],
+      [1, 'rgba(70,130,180,0.85)']
+    ],
+    'traveler-namibia': [
+      [0, 'rgba(255,245,238,0.95)'],
+      [0.4, 'rgba(255,218,185,0.9)'],
+      [0.8, 'rgba(210,180,140,0.9)'],
+      [1, 'rgba(184,134,11,0.85)']
+    ],
+    'traveler-albania': [
+      [0, 'rgba(255,240,245,0.95)'],
+      [0.4, 'rgba(205,92,92,0.9)'],
+      [0.8, 'rgba(139,0,0,0.9)'],
+      [1, 'rgba(80,0,0,0.85)']
+    ],
+    'traveler-greenland': [
+      [0, 'rgba(240,255,255,0.95)'],
+      [0.4, 'rgba(176,224,230,0.9)'],
+      [0.8, 'rgba(95,158,160,0.9)'],
+      [1, 'rgba(0,128,128,0.85)']
+    ],
+    'traveler-bolivia': [
+      [0, 'rgba(255,255,224,0.95)'],
+      [0.4, 'rgba(255,215,0,0.9)'],
+      [0.8, 'rgba(124,252,0,0.9)'],
+      [1, 'rgba(50,205,50,0.85)']
+    ]
+  };
+
+  function createGradientFromStops(stops) {
+    if (!ctx || !canvas || !stops) return null;
+    var g = ctx.createLinearGradient(0, 0, canvas.width, 0);
+    for (var i = 0; i < stops.length; i++) g.addColorStop(stops[i][0], stops[i][1]);
+    return g;
+  }
 
   function createGradient() {
-    if (!ctx || !canvas) return null;
-    var g = ctx.createLinearGradient(0, 0, canvas.width, 0);
-    g.addColorStop(0, 'rgba(255,255,255,0.95)');
-    g.addColorStop(0.5, 'rgba(255, 220, 180, 0.9)');
-    g.addColorStop(1, 'rgba(196, 92, 62, 0.85)');
-    return g;
+    return createGradientFromStops(DEFAULT_COLOR_STOPS);
+  }
+
+  function getActiveGradient() {
+    if (currentThemeKey && themeGradient) return themeGradient;
+    return gradient || createGradient();
+  }
+
+  function setTheme(themeKey, durationMs) {
+    if (themeTimeoutId) clearTimeout(themeTimeoutId);
+    themeTimeoutId = null;
+    durationMs = durationMs == null ? 15000 : durationMs;
+    var stops = BUBBLE_THEMES[themeKey];
+    if (stops) {
+      currentThemeKey = themeKey;
+      themeGradient = createGradientFromStops(stops);
+    } else {
+      currentThemeKey = null;
+      themeGradient = null;
+    }
+    if (durationMs > 0) {
+      themeTimeoutId = setTimeout(function () {
+        themeTimeoutId = null;
+        currentThemeKey = null;
+        themeGradient = null;
+      }, durationMs);
+    }
   }
 
   function Particle(effect) {
@@ -150,8 +286,8 @@
   function animate() {
     if (!ctx || !effect || !canvas) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    gradient = gradient || createGradient();
-    if (gradient) effect.handleParticles(ctx, gradient);
+    var activeGradient = getActiveGradient();
+    if (activeGradient) effect.handleParticles(ctx, activeGradient);
     animationId = requestAnimationFrame(animate);
   }
 
@@ -204,6 +340,9 @@
       canvas.height = nh;
       effect.resize(nw, nh);
       gradient = createGradient();
+      if (currentThemeKey && BUBBLE_THEMES[currentThemeKey]) {
+        themeGradient = createGradientFromStops(BUBBLE_THEMES[currentThemeKey]);
+      }
     });
 
     animate();
@@ -211,6 +350,7 @@
 
   window.BubblesEffect = {
     init: init,
-    stop: stop
+    stop: stop,
+    setTheme: setTheme
   };
 })(window);

@@ -190,6 +190,37 @@
     }
   }
 
+  var changeUpAudio = null;
+  var changeDownAudio = null;
+
+  function playChangeUp() {
+    if (muted) return;
+    try {
+      if (changeUpAudio) {
+        changeUpAudio.currentTime = 0;
+        changeUpAudio.play().catch(function () {});
+      } else {
+        changeUpAudio = new Audio('assets/audio/change-up-1s.mp3');
+        changeUpAudio.volume = 0.5;
+        changeUpAudio.play().catch(function () {});
+      }
+    } catch (e) {}
+  }
+
+  function playChangeDown() {
+    if (muted) return;
+    try {
+      if (changeDownAudio) {
+        changeDownAudio.currentTime = 0;
+        changeDownAudio.play().catch(function () {});
+      } else {
+        changeDownAudio = new Audio('assets/audio/change-down-1s.mp3');
+        changeDownAudio.volume = 0.5;
+        changeDownAudio.play().catch(function () {});
+      }
+    } catch (e) {}
+  }
+
   function playMinigameSuccessSynth() {
     var ctx = getAudioCtx();
     if (!ctx || muted) return;
@@ -251,6 +282,8 @@
     playMinigameSuccess: playMinigameSuccess,
     playMinigameFail: playMinigameFail,
     playChop: playChop,
-    playStepCorrect: playStepCorrect
+    playStepCorrect: playStepCorrect,
+    playChangeUp: playChangeUp,
+    playChangeDown: playChangeDown
   };
 })(window);

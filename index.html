@@ -9,22 +9,19 @@
 </head>
 <body>
   <div id="app">
-    <!-- Step 1: Welcome + enter name (CodePen-style opening) -->
+    <!-- Step 1: Welcome (no name input) -->
     <div id="name-overlay" class="welcome-overlay">
       <div class="welcome-modal">
         <p class="welcome-modal__label">Welcome</p>
         <h2 class="welcome-modal__title">2:03 AM</h2>
-        <hr class="welcome-modal__hr" />
-        <h3 class="welcome-modal__prompt">Enter your name</h3>
-        <input id="name-input" type="text" placeholder="Your name" maxlength="24" autocomplete="name" />
         <button id="btn-name-next" type="button" class="welcome-modal__btn">Next</button>
       </div>
     </div>
 
     <!-- Step 2: Intro + Enter the street -->
     <div id="title-overlay" class="hidden">
-      <h1>2:03 AM</h1>
-      <p class="tagline">A night market in Taiwan</p>
+      <!-- <h1>2:03 AM</h1> -->
+      <h2 class="tagline">A night market in Taiwan</h2>
       <p class="intro">You've never seen so many people lining up for fried chicken at 2 in the morning.</p>
       <button id="btn-start" type="button">Enter the street</button>
     </div>

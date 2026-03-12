@@ -6,7 +6,6 @@
 
   var gameViewport = null;
   var nameOverlay = null;
-  var nameInput = null;
   var btnNameNext = null;
   var titleOverlay = null;
   var btnStart = null;
@@ -98,17 +97,7 @@
   }
 
   function goToIntro() {
-    var raw = (nameInput && nameInput.value) ? nameInput.value.trim() : '';
-    if (raw.length === 0) {
-      if (nameInput) {
-        nameInput.classList.add('error');
-        nameInput.placeholder = 'Enter your name';
-        nameInput.focus();
-      }
-      return;
-    }
-    if (nameInput) nameInput.classList.remove('error');
-    playerName = raw;
+    playerName = 'Traveler';
     window.playerName = playerName;
     if (typeof AudioManager !== 'undefined') AudioManager.playClick();
     if (nameOverlay) nameOverlay.classList.add('slide-out');
@@ -124,7 +113,6 @@
   function init() {
     gameViewport = document.getElementById('game-viewport');
     nameOverlay = document.getElementById('name-overlay');
-    nameInput = document.getElementById('name-input');
     btnNameNext = document.getElementById('btn-name-next');
     titleOverlay = document.getElementById('title-overlay');
     btnStart = document.getElementById('btn-start');
@@ -138,12 +126,6 @@
     Scene.init(viewportWidth);
 
     if (btnNameNext) btnNameNext.addEventListener('click', goToIntro);
-    if (nameInput) {
-      nameInput.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter') { e.preventDefault(); goToIntro(); }
-      });
-      nameInput.addEventListener('input', function () { nameInput.classList.remove('error'); });
-    }
 
     btnStart.addEventListener('click', startGame);
     btnLeft.addEventListener('click', function () {
@@ -169,9 +151,11 @@
       } else if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') {
         e.preventDefault();
         cyclePlayerSprite(-1); // 上一個精靈
+        if (typeof AudioManager !== 'undefined') AudioManager.playChangeUp();
       } else if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') {
         e.preventDefault();
         cyclePlayerSprite(1);  // 下一個精靈
+        if (typeof AudioManager !== 'undefined') AudioManager.playChangeDown();
       } else if (e.key === ' ') {
         e.preventDefault();
         doJump();
@@ -266,6 +250,9 @@
     if (btn) btn.classList.add('visited');
     updateProgress();
     if (typeof AudioManager !== 'undefined') AudioManager.playClick();
+    if (typeof BubblesEffect !== 'undefined') {
+      BubblesEffect.setTheme(id, 15000);
+    }
     if (typeof Dialogue !== 'undefined') {
       Dialogue.showForHotspot(id);
     }

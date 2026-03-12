@@ -25,7 +25,7 @@ html, body {
   display: none !important;
 }
 
-/* ---- Name overlay (Welcome + enter name, CodePen-style opening) ---- */
+/* ---- Name overlay (Welcome, no name input) ---- */
 .welcome-overlay {
   position: fixed;
   inset: 0;
@@ -67,42 +67,7 @@ html, body {
   font-weight: 300;
   letter-spacing: 0.15em;
   color: #f5e6d3;
-  margin: 0 0 1rem;
-}
-.welcome-modal__hr {
-  border: none;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,220,180,0.3), transparent);
   margin: 0 0 1.5rem;
-}
-.welcome-modal__prompt {
-  font-size: 1rem;
-  font-weight: normal;
-  color: rgba(255, 255, 255, 0.85);
-  margin: 0 0 1rem;
-}
-.welcome-modal #name-input {
-  display: block;
-  width: 100%;
-  max-width: 16rem;
-  margin: 0 auto 1.5rem;
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-  color: #f0e6dc;
-  background: rgba(0, 0, 0, 0.35);
-  border: 2px solid rgba(255, 220, 180, 0.35);
-  border-radius: 6px;
-  outline: none;
-  transition: border-color 0.2s;
-}
-.welcome-modal #name-input::placeholder {
-  color: rgba(255, 255, 255, 0.4);
-}
-.welcome-modal #name-input:focus {
-  border-color: rgba(196, 92, 62, 0.8);
-}
-.welcome-modal #name-input.error {
-  border-color: #c45c3e;
 }
 .welcome-modal__btn {
   padding: 0.6rem 1.8rem;
