@@ -265,7 +265,7 @@ html, body {
   width: 300px;
   max-width: 85vw;
   border-radius: 8px;
-  overflow: visible;
+  overflow: hidden;
   box-shadow: 0 2px 16px rgba(0,0,0,0.5);
   background: #000;
   aspect-ratio: 16 / 9;
@@ -279,6 +279,8 @@ html, body {
   border: none;
   pointer-events: none;
   border-radius: 8px;
+  transform: scale(1.1);
+  transform-origin: center center;
 }
 #game-youtube-wrap video {
   position: absolute;
@@ -290,36 +292,34 @@ html, body {
   pointer-events: none;
   border-radius: 8px;
   object-fit: cover;
+  transform: scale(1.1);
+  transform-origin: center center;
 }
-/* 左上角摺角（外翻：三角從角落向外延伸） */
+/* 左上角摺角（內摺、小正方形） */
 #game-youtube-wrap::before {
   content: "";
   position: absolute;
-  top: -44px;
-  left: -44px;
+  top: 0;
+  left: 0;
   z-index: 1;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 44px 44px 0 0;
-  border-color: rgba(255, 200, 220, 0.98) transparent transparent transparent;
-  border-radius: 6px 0 0 0;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 200, 220, 0.95);
+  border-radius: 0 0 6px 0;
+  box-shadow: -1px 1px 4px rgba(0, 0, 0, 0.2);
 }
-/* 右下角摺角（外翻） */
+/* 右下角摺角（內摺、小正方形） */
 #game-youtube-wrap::after {
   content: "";
   position: absolute;
-  right: -44px;
-  bottom: -44px;
+  right: 0;
+  bottom: 0;
   z-index: 1;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 0 0 44px 44px;
-  border-color: transparent transparent rgba(255, 200, 220, 0.98) transparent;
-  border-radius: 0 0 6px 0;
-  box-shadow: -2px -2px 8px rgba(0, 0, 0, 0.25);
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 200, 220, 0.95);
+  border-radius: 6px 0 0 0;
+  box-shadow: 1px -1px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* Game HUD: progress + hint (game-like goal) */
@@ -417,10 +417,13 @@ html, body {
   transition: transform 0.35s ease-out;
 }
 
-/* Scene background: OpenGameArt pixel art street (OGA-BY 3.0) + dark overlay */
+/* Scene background: 覆蓋整條 strip（含左側留白），避免左邊出現黑屏 */
 #scene-bg {
   position: absolute;
-  inset: 0;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
   z-index: 0;
   overflow: hidden;
   background-image: url("../assets/images/street-bg-opengameart.png");

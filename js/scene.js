@@ -5,8 +5,8 @@
 (function (window) {
   'use strict';
 
-  var SCENE_WIDTH = 3000;   // total strip width (px)
-  var CONTENT_WIDTH = 3000; // scroll to end of strip so player can reach far right
+  var SCENE_WIDTH = 3000;
+  var CONTENT_WIDTH = 3000;
   var VIEWPORT_WIDTH = 0;
   var currentScroll = 0;
   var sceneEl = null;
@@ -15,15 +15,39 @@
     VIEWPORT_WIDTH = Math.max(0, viewportWidth);
     sceneEl = document.getElementById('scene');
     if (!sceneEl) return;
-    sceneEl.style.width = SCENE_WIDTH + 'px';
+    sceneEl.style.width = CONTENT_WIDTH + 'px';
+    var maxScroll = Math.max(0, CONTENT_WIDTH - Math.max(1, VIEWPORT_WIDTH));
+    if (window.__SCENE_DEBUG) {
+      console.log('[Scene.init]', {
+        viewportWidthArg: viewportWidth,
+        VIEWPORT_WIDTH: VIEWPORT_WIDTH,
+        SCENE_WIDTH: SCENE_WIDTH,
+        CONTENT_WIDTH: CONTENT_WIDTH,
+        maxScroll: maxScroll,
+        currentScroll: currentScroll
+      });
+    }
     setScroll(currentScroll);
   }
 
   function setScroll(x) {
     var safeViewport = Math.max(1, VIEWPORT_WIDTH);
     var maxScroll = Math.max(0, CONTENT_WIDTH - safeViewport);
+    var prevScroll = currentScroll;
     currentScroll = Math.max(0, Math.min(maxScroll, Math.round(x)));
     if (sceneEl) sceneEl.style.transform = 'translateX(-' + currentScroll + 'px)';
+    if (window.__SCENE_DEBUG) {
+      console.log('[Scene.setScroll]', {
+        input: x,
+        prevScroll: prevScroll,
+        currentScroll: currentScroll,
+        maxScroll: maxScroll,
+        VIEWPORT_WIDTH: VIEWPORT_WIDTH,
+        CONTENT_WIDTH: CONTENT_WIDTH,
+        atLeft: currentScroll <= 0,
+        atRight: currentScroll >= maxScroll
+      });
+    }
     return currentScroll;
   }
 
@@ -32,11 +56,25 @@
   }
 
   function moveBy(delta) {
+    if (window.__SCENE_DEBUG) {
+      var maxScroll = Math.max(0, CONTENT_WIDTH - Math.max(1, VIEWPORT_WIDTH));
+      var atLeft = currentScroll <= 0;
+      var atRight = currentScroll >= maxScroll;
+      console.log('[Scene.moveBy]', {
+        delta: delta,
+        currentScrollBefore: currentScroll,
+        willBe: currentScroll + delta,
+        atLeft: atLeft,
+        atRight: atRight
+      });
+      if (delta < 0 && atLeft) console.warn('[Scene] 已經在最左邊 (currentScroll=0)，無法再往左。');
+      if (delta > 0 && atRight) console.warn('[Scene] 已經在最右邊，無法再往右。');
+    }
     return setScroll(currentScroll + delta);
   }
 
   function getSceneWidth() {
-    return SCENE_WIDTH;
+    return CONTENT_WIDTH;
   }
 
   function getViewportWidth() {
@@ -90,7 +128,24 @@
     getSceneWidth: getSceneWidth,
     getViewportWidth: getViewportWidth,
     addHotspot: addHotspot,
-    getSceneElement: function () { return sceneEl; }
+    getSceneElement: function () { return sceneEl; },
+    /** Debug: 在 console 打 Scene.debug() 或 Scene.debug(true) 開啟/關閉每次移動的 log */
+    debug: function (on) {
+      window.__SCENE_DEBUG = on !== undefined ? !!on : true;
+      console.log('[Scene.debug]', window.__SCENE_DEBUG ? 'ON — 按左/右鍵會 log' : 'OFF');
+      if (window.__SCENE_DEBUG) {
+        var safe = Math.max(1, VIEWPORT_WIDTH);
+        var max = Math.max(0, CONTENT_WIDTH - safe);
+        console.log('[Scene 目前狀態]', {
+          currentScroll: currentScroll,
+          maxScroll: max,
+          VIEWPORT_WIDTH: VIEWPORT_WIDTH,
+          CONTENT_WIDTH: CONTENT_WIDTH,
+          atLeft: currentScroll <= 0,
+          atRight: currentScroll >= max
+        });
+      }
+    }
   };
 
   /**

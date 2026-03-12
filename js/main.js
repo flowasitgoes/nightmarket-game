@@ -236,6 +236,8 @@
         playerEl.classList.remove('Character--walk-left', 'Character--walk-right', 'Character--walk-up');
         playerEl.classList.add('Character--walk-down', 'idle');
       }
+      window.__SCENE_DEBUG = true;
+      console.log('[Debug] 場景捲動已開啟 — 按 ← / → 會在 console 顯示 scroll 與邊界。輸入 Scene.debug() 可看目前狀態，Scene.debug(false) 關閉 log。');
       var tvFrame = document.getElementById('game-tv-frame');
       if (tvFrame) tvFrame.classList.add('tv-frame--on');
       var gameVideo = document.getElementById('game-video-player');
