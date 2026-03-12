@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Walking Demo — 水平移動</title>
+  <style>
+    :root { --pixel-size: 4; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(180deg, #5DCBE4 0%, #47BCE4 100%);
+      min-height: 100vh;
+      padding-top: calc(var(--pixel-size) * 18px);
+      font-family: 'Dosis', sans-serif;
+    }
+    .PixelArtImage {
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+    }
+    .Container { max-width: calc(var(--pixel-size) * 320px); margin: 0 auto; }
+    .TitleImage {
+      width: calc(var(--pixel-size) * 95px);
+      display: block;
+      margin: 0 auto;
+    }
+    .CharacterStage {
+      position: relative;
+      height: calc(var(--pixel-size) * 80px);
+      margin: calc(var(--pixel-size) * 6px) 0;
+      overflow: hidden;
+    }
+    .CharacterWrapper {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: left 0.12s ease-out;
+    }
+    .Character {
+      width: calc(var(--pixel-size) * 32px);
+      height: calc(var(--pixel-size) * 32px);
+      overflow: hidden;
+      position: relative;
+    }
+    .Character_shadow {
+      width: calc(var(--pixel-size) * 32px);
+      height: calc(var(--pixel-size) * 32px);
+      opacity: 0.25;
+      position: absolute;
+    }
+    @keyframes walkAnimation {
+      from { transform: translate3d(0%, 0%, 0); }
+      to { transform: translate3d(-100%, 0%, 0); }
+    }
+    .Character_sprite-sheet {
+      width: calc(var(--pixel-size) * 128px);
+      animation: walkAnimation 0.6s steps(4) infinite;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: none;
+    }
+    .Character_sprite-sheet.active { display: block; }
+    .Character--walk-down .Character_sprite-sheet { top: 0; }
+    .Character--walk-right .Character_sprite-sheet { top: calc(var(--pixel-size) * -32px); }
+    .Character--walk-up .Character_sprite-sheet { top: calc(var(--pixel-size) * -64px); }
+    .Character--walk-left .Character_sprite-sheet { top: calc(var(--pixel-size) * -96px); }
+    .SpritesheetSlider { position: relative; margin-bottom: calc(var(--pixel-size) * 10px); }
+    .flex-center { display: flex; justify-content: center; }
+    .NavigationBubble {
+      appearance: none;
+      width: calc(var(--pixel-size) * 3px);
+      height: calc(var(--pixel-size) * 3px);
+      background: #2497cc;
+      border: 0;
+      outline: 0;
+      cursor: pointer;
+      padding: 0;
+      margin: 0 0.5em;
+    }
+    .NavigationBubble:hover:not(.active) { opacity: 0.9; }
+    .NavigationBubble.active { background: #fff; }
+    .NextSpritesheetButton {
+      appearance: none;
+      border: 0;
+      background: none;
+      padding: 1em;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .NextSpritesheetButton--prev { left: 0; }
+    .NextSpritesheetButton--next { right: 0; }
+    .NextSpritesheetButton:hover { cursor: pointer; background: rgba(255,255,255,0.2); }
+    .NextSpritesheetButton svg { display: block; width: calc(var(--pixel-size) * 4px); }
+    .DirectionArrow { background: none; outline: 0; border: 0; cursor: pointer; }
+    .DirectionArrow svg { display: block; width: calc(var(--pixel-size) * 13px); }
+    .DirectionArrow--active .Arrow_outline-top { stroke: #5268ec; }
+    .DirectionArrow--active .Arrow_surface { stroke: #639bff; }
+    .DirectionArrow--active .Arrow_outline-bottom { stroke: #164496; }
+    .DirectionArrow--active .Arrow_edge { stroke: #7baaff; }
+    .DirectionArrow--active .Arrow_front { stroke: #4c8bfd; }
+    .DirectionArrow--active .Arrow_arrow-inset { stroke: #fff; }
+    .DirectionArrow--active .Arrow_arrow-body { stroke: #fff; }
+    .DemoDirectionUI { display: flex; justify-content: center; gap: 4px; margin-top: 8px; }
+    .HorizontalHint { text-align: center; color: #164496; font-size: 14px; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <main class="Container">
+    <img class="TitleImage PixelArtImage" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/21542/WalkingDemo-WalkingSprites.png" alt="Walking Demo" />
+    <div class="SpritesheetSlider">
+      <div class="CharacterStage">
+        <div class="CharacterWrapper" id="characterWrapper">
+          <div class="Character Character--walk-down" id="character">
+            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/21542/WalkingDemo-Shadow.png" class="Character_shadow PixelArtImage" alt="" />
+          </div>
+        </div>
+      </div>
+      <div class="Navigation flex-center"></div>
+      <button type="button" class="NextSpritesheetButton NextSpritesheetButton--prev" aria-label="Previous">‹</button>
+      <button type="button" class="NextSpritesheetButton NextSpritesheetButton--next" aria-label="Next">›</button>
+    </div>
+    <p class="HorizontalHint">← → 或 A/D 可水平移動角色</p>
+    <div class="DemoDirectionUI flex-center">
+      <button type="button" class="DirectionArrow DirectionArrow-left" aria-label="Walk left">←</button>
+      <button type="button" class="DirectionArrow DirectionArrow-up" aria-label="Walk up">↑</button>
+      <button type="button" class="DirectionArrow DirectionArrow-down DirectionArrow--active" aria-label="Walk down">↓</button>
+      <button type="button" class="DirectionArrow DirectionArrow-right" aria-label="Walk right">→</button>
+    </div>
+  </main>
+  <script>
+    (function () {
+      var spritesheets = [
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/21542/WalkingDemo-HANK-2-SHEET.png",
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/21542/WalkingDemo-EMMY-SHEET.png",
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/21542/WalkingDemo-SHIRMOND-SHEET.png",
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/21542/WalkingDemo-SARA-SHEET.png",
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/21542/WalkingDemo-PATTY-SHEET.png",
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/21542/WalkingDemo-JESSIE-SHEET.png",
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/21542/WalkingDemo-KIM-SHEET.png",
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/21542/WalkingDemo-MINDY-SHEET.png",
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/21542/WalkingDemo-ZAK-SHEET.png",
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/21542/WalkingDemo-BEAR-SHEET.png"
+      ];
+      var characterEl = document.getElementById('character');
+      var wrapperEl = document.getElementById('characterWrapper');
+      var activeIndex = 0;
+      var characterX = 0;
+      var step = 24;
+      var minX = -160;
+      var maxX = 160;
+
+      spritesheets.forEach(function (url, i) {
+        var img = document.createElement('img');
+        img.src = url;
+        img.className = 'PixelArtImage Character_sprite-sheet index-' + i;
+        img.alt = '';
+        characterEl.appendChild(img);
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'NavigationBubble index-' + i;
+        btn.setAttribute('aria-label', 'Character ' + (i + 1));
+        btn.addEventListener('click', function () { setActive(i); });
+        document.querySelector('.Navigation').appendChild(btn);
+      });
+
+      function setActive(index) {
+        activeIndex = index;
+        document.querySelectorAll('.active').forEach(function (n) { n.classList.remove('active'); });
+        document.querySelectorAll('.index-' + index).forEach(function (n) { n.classList.add('active'); });
+      }
+
+      function setDirection(direction) {
+        ['Character--walk-down', 'Character--walk-right', 'Character--walk-up', 'Character--walk-left'].forEach(function (c) { characterEl.classList.remove(c); });
+        document.querySelector('.DirectionArrow--active').classList.remove('DirectionArrow--active');
+        var dirClass = 'Character--walk-down';
+        var arrow = document.querySelector('.DirectionArrow-down');
+        if (direction === 'LEFT') { dirClass = 'Character--walk-left'; arrow = document.querySelector('.DirectionArrow-left'); }
+        if (direction === 'RIGHT') { dirClass = 'Character--walk-right'; arrow = document.querySelector('.DirectionArrow-right'); }
+        if (direction === 'UP') { dirClass = 'Character--walk-up'; arrow = document.querySelector('.DirectionArrow-up'); }
+        if (arrow) arrow.classList.add('DirectionArrow--active');
+        characterEl.classList.add(dirClass);
+      }
+
+      function moveHorizontal(delta) {
+        characterX = Math.max(minX, Math.min(maxX, characterX + delta));
+        wrapperEl.style.left = '50%';
+        wrapperEl.style.transform = 'translateX(calc(-50% + ' + characterX + 'px))';
+      }
+
+      document.querySelector('.NextSpritesheetButton--prev').addEventListener('click', function () {
+        activeIndex = activeIndex > 0 ? activeIndex - 1 : spritesheets.length - 1;
+        setActive(activeIndex);
+      });
+      document.querySelector('.NextSpritesheetButton--next').addEventListener('click', function () {
+        activeIndex = activeIndex < spritesheets.length - 1 ? activeIndex + 1 : 0;
+        setActive(activeIndex);
+      });
+      document.querySelector('.DirectionArrow-left').addEventListener('click', function () {
+        setDirection('LEFT');
+        moveHorizontal(-step);
+      });
+      document.querySelector('.DirectionArrow-right').addEventListener('click', function () {
+        setDirection('RIGHT');
+        moveHorizontal(step);
+      });
+      document.querySelector('.DirectionArrow-up').addEventListener('click', function () { setDirection('UP'); });
+      document.querySelector('.DirectionArrow-down').addEventListener('click', function () { setDirection('DOWN'); });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
+          e.preventDefault();
+          setDirection('LEFT');
+          moveHorizontal(-step);
+        }
+        if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
+          e.preventDefault();
+          setDirection('RIGHT');
+          moveHorizontal(step);
+        }
+        if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') { e.preventDefault(); setDirection('UP'); }
+        if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') { e.preventDefault(); setDirection('DOWN'); }
+      });
+
+      setActive(0);
+    })();
+  </script>
+</body>
+</html>

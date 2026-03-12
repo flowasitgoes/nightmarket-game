@@ -1,0 +1,565 @@
+/* ---- Reset & base ---- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: #0d0d12;
+  color: #f0e6dc;
+}
+
+#app {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ---- Title overlay ---- */
+#title-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at 50% 30%, #2a1a1a 0%, #0d0d12 60%);
+  padding: 2rem;
+  text-align: center;
+  transition: opacity 0.8s ease;
+}
+
+#title-overlay.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#title-overlay h1 {
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  margin: 0 0 0.5rem;
+  color: #f5e6d3;
+}
+
+#title-overlay .tagline {
+  font-size: 1rem;
+  opacity: 0.85;
+  margin: 0 0 2rem;
+}
+
+#title-overlay .intro {
+  max-width: 28rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  opacity: 0.9;
+  margin: 0 0 2rem;
+}
+
+#btn-start {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  background: #c45c3e;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#btn-start:hover {
+  background: #d46a4a;
+}
+
+/* ---- Game viewport ---- */
+#game-viewport {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: none;
+  flex-direction: column;
+  background: #0d0d12;
+}
+
+#game-viewport.active {
+  display: flex;
+}
+
+#time-display {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 20;
+  font-size: 1.25rem;
+  letter-spacing: 0.1em;
+  opacity: 0.9;
+}
+
+#btn-mute {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 20;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  font-size: 1.25rem;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 4px;
+  cursor: pointer;
+  color: #f0e6dc;
+}
+
+#btn-mute.muted {
+  opacity: 0.6;
+}
+
+/* Game HUD: progress + hint (game-like goal) */
+#game-hud {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem 1rem;
+  background: rgba(0,0,0,0.5);
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.1);
+  font-size: 0.85rem;
+}
+
+#progress-text {
+  font-weight: 600;
+  color: #e8d4b8;
+}
+
+#hint-text {
+  color: rgba(255,255,255,0.8);
+  font-size: 0.75rem;
+}
+
+#game-hud.all-met #hint-text {
+  color: #a8d4a0;
+}
+
+/* First-time controls hint */
+#controls-hint {
+  position: fixed;
+  bottom: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 1rem;
+  background: rgba(20,18,16,0.95);
+  border: 1px solid rgba(255,200,150,0.4);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #f0e6dc;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  animation: hint-in 0.35s ease;
+}
+
+#controls-hint.hidden {
+  display: none !important;
+}
+
+@keyframes hint-in {
+  from { opacity: 0; transform: translateX(-50%) translateY(8px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+#controls-hint-dismiss {
+  padding: 0.25rem 0.6rem;
+  font-size: 0.8rem;
+  background: #c45c3e;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#controls-hint-dismiss:hover {
+  background: #d46a4a;
+}
+#scene-container {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  position: relative;
+  touch-action: pan-y pinch-zoom;
+  background: #1a1518;
+}
+
+#scene {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  will-change: transform;
+  transition: transform 0.35s ease-out;
+}
+
+/* Scene background: OpenGameArt pixel art street (OGA-BY 3.0) + dark overlay */
+#scene-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background-image: url("../assets/images/street-bg-opengameart.png");
+  background-repeat: repeat-x;
+  background-size: auto 100%;
+  background-position: left center;
+}
+
+#scene-bg-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left center;
+}
+
+/* Optional: if you add assets/images/street-bg.png, change the img src in index.html to that file */
+
+/* Placeholder overlay: keeps the scene dark and atmospheric */
+#scene::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(26, 21, 32, 0.7) 0%, rgba(37, 26, 26, 0.5) 40%, rgba(31, 21, 18, 0.4) 70%, transparent 100%),
+    radial-gradient(ellipse 80% 50% at 30% 70%, rgba(200, 90, 50, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 70% 60%, rgba(180, 70, 40, 0.1) 0%, transparent 45%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Movement buttons (Kenney UI Pack CC0) */
+#btn-left,
+#btn-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  width: 3rem;
+  height: 4rem;
+  padding: 0;
+  font-size: 0;
+  line-height: 0;
+  text-indent: -9999px;
+  background: rgba(0,0,0,0.35) no-repeat center;
+  background-size: 1.5rem 2rem;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 4px;
+  color: #f0e6dc;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+#btn-left {
+  left: 0.5rem;
+  background-image: url("../assets/images/btn-left.png");
+}
+
+#btn-right {
+  right: 0.5rem;
+  background-image: url("../assets/images/btn-right.png");
+}
+
+#btn-left:hover,
+#btn-right:hover {
+  background-color: rgba(0,0,0,0.5);
+}
+
+@media (max-width: 600px) {
+  #btn-left, #btn-right {
+    width: 2.5rem;
+    height: 3rem;
+    background-size: 1.2rem 1.6rem;
+  }
+}
+
+/* ---- Player character (walking sprite on road) ---- */
+:root {
+  --pixel-size: 3;
+}
+.pixel-art {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+#player-character {
+  position: absolute;
+  left: 50%;
+  bottom: 18%;
+  transform: translateX(-50%);
+  z-index: 15;
+  width: calc(var(--pixel-size) * 32px);
+  height: calc(var(--pixel-size) * 32px);
+  overflow: hidden;
+  pointer-events: none;
+}
+#player-character .Character_shadow {
+  position: absolute;
+  width: calc(var(--pixel-size) * 32px);
+  height: calc(var(--pixel-size) * 32px);
+  opacity: 0.3;
+  top: 0;
+  left: 0;
+}
+#player-character .Character_sprite-sheet {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(var(--pixel-size) * 128px);
+  animation: walkAnimation 0.6s steps(4) infinite;
+}
+#player-character.Character--walk-down .Character_sprite-sheet { top: 0; }
+#player-character.Character--walk-right .Character_sprite-sheet { top: calc(var(--pixel-size) * -32px); }
+#player-character.Character--walk-up .Character_sprite-sheet { top: calc(var(--pixel-size) * -64px); }
+#player-character.Character--walk-left .Character_sprite-sheet { top: calc(var(--pixel-size) * -96px); }
+@keyframes walkAnimation {
+  from { transform: translate3d(0%, 0%, 0); }
+  to { transform: translate3d(-100%, 0%, 0); }
+}
+#player-character.idle .Character_sprite-sheet {
+  animation: none;
+  transform: translate3d(0%, 0%, 0);
+}
+
+/* ---- Hotspots: visible flag/icon badges (Osmo-style caption clarity) ---- */
+.hotspot {
+  position: absolute;
+  z-index: 5;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+.hotspot:hover,
+.hotspot:focus {
+  box-shadow: 0 0 0 2px rgba(255, 220, 180, 0.7), 0 0 20px rgba(255, 180, 80, 0.2);
+  outline: none;
+}
+
+.hotspot:focus-visible {
+  transform: scale(1.02);
+}
+
+/* Visible badge: flag (travelers) or icon (stall, oil, etc.) */
+.hotspot-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 252, 248, 0.95);
+  color: #1a1614;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.3);
+  pointer-events: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hotspot:hover .hotspot-badge,
+.hotspot:focus .hotspot-badge {
+  transform: scale(1.08);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.35), 0 0 0 2px rgba(255, 200, 150, 0.5);
+}
+
+.hotspot-badge-flag {
+  width: 48px;
+  height: 48px;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.hotspot-badge-icon {
+  width: 40px;
+  height: 40px;
+  font-size: 22px;
+  line-height: 1;
+}
+
+/* Tooltip on hover (full label) */
+.hotspot::after {
+  content: attr(data-label);
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  transform: translateX(-50%) translateY(-8px);
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  background: var(--color-light, #f5f0eb);
+  color: var(--color-dark, #1a1614);
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 6px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+.hotspot:hover::after,
+.hotspot:focus::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-10px);
+}
+
+/* Remove old hint icon (replaced by badge) */
+.hotspot::before {
+  display: none;
+}
+
+/* Visited state: slight dim so player sees progress */
+.hotspot.visited .hotspot-badge {
+  opacity: 0.82;
+  filter: saturate(0.85);
+}
+
+.hotspot.visited::after {
+  content: attr(data-label) " ✓";
+}
+
+/* ---- Dialogue overlay ---- */
+#dialogue-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0 1rem 3rem;
+  background: transparent;
+  pointer-events: none;
+}
+
+#dialogue-overlay.visible {
+  pointer-events: auto;
+  background: rgba(0,0,0,0.4);
+}
+
+#dialogue-overlay.visible #dialogue-box {
+  animation: dialogue-in 0.25s ease;
+}
+
+@keyframes dialogue-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#dialogue-box {
+  max-width: 32rem;
+  width: 100%;
+  padding: 1.25rem 1.5rem;
+  background: rgba(255, 252, 248, 0.97);
+  color: #1a1614;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+}
+
+#dialogue-speaker {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2a2520;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+#dialogue-speaker::before {
+  content: "";
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #c45c3e;
+}
+
+#dialogue-text {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  color: #1a1614;
+}
+
+#dialogue-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+#dialogue-actions button {
+  padding: 0.5rem 1.1rem;
+  font-size: 0.9rem;
+  background: #1a1614;
+  color: #f5f0eb;
+  border: 1px solid #1a1614;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+#dialogue-actions button:hover {
+  background: #2a2520;
+  color: #fff;
+}
+
+#dialogue-next.only-close {
+  display: none;
+}
+
+/* ---- Ending overlay ---- */
+#ending-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: rgba(0,0,0,0.85);
+  text-align: center;
+}
+
+#ending-content {
+  max-width: 28rem;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #f0e6dc;
+}
+
+#ending-content .ending-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #e8d4b8;
+}

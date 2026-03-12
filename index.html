@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2:03 AM — Taiwanese Popcorn Chicken</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Title / intro overlay -->
+    <div id="title-overlay">
+      <h1>2:03 AM</h1>
+      <p class="tagline">A night market in Taiwan</p>
+      <p class="intro">You've never seen so many people lining up for fried chicken at 2 in the morning.</p>
+      <button id="btn-start" type="button">Enter the street</button>
+    </div>
+
+    <!-- Game viewport -->
+    <div id="game-viewport">
+      <div id="time-display">2:03 AM</div>
+      <div id="game-hud" aria-live="polite">
+        <span id="progress-text">Travelers: 0/10</span>
+        <span id="hint-text">Click flags & icons to talk. Buy a bag when ready.</span>
+      </div>
+      <button id="btn-mute" type="button" title="Mute">🔊</button>
+
+      <div id="scene-container">
+        <div id="scene">
+          <div id="scene-bg" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <!-- Player character: fixed on road, scene scrolls underneath -->
+      <div id="player-character" class="Character Character--walk-down" aria-hidden="true">
+        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/21542/WalkingDemo-Shadow.png" class="Character_shadow pixel-art" alt="" />
+        <img id="player-sprite-sheet" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/21542/WalkingDemo-JESSIE-SHEET.png" class="Character_sprite-sheet pixel-art" alt="" />
+      </div>
+
+      <button id="btn-left" type="button" aria-label="Move left">‹</button>
+      <button id="btn-right" type="button" aria-label="Move right">›</button>
+    </div>
+
+    <!-- First-time hint (dismissible) -->
+    <div id="controls-hint" class="hidden">
+      <span>← → or A / D to move · ↑ ↓ or W / S to change character · Click flags & icons to talk</span>
+      <button id="controls-hint-dismiss" type="button">OK</button>
+    </div>
+
+    <!-- Dialogue overlay -->
+    <div id="dialogue-overlay" class="hidden">
+      <div id="dialogue-box">
+        <div id="dialogue-speaker"></div>
+        <div id="dialogue-text"></div>
+        <div id="dialogue-actions">
+          <button id="dialogue-next" type="button">Next</button>
+          <button id="dialogue-close" type="button">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ending overlay -->
+    <div id="ending-overlay" class="hidden">
+      <div id="ending-content"></div>
+    </div>
+  </div>
+
+  <script src="js/characters.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/dialogue.js"></script>
+  <script src="js/scene.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
