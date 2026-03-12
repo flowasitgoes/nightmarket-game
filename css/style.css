@@ -563,3 +563,19 @@ html, body {
   margin-bottom: 1rem;
   color: #e8d4b8;
 }
+
+#ending-content .ending-back-btn {
+  margin-top: 1.5rem;
+  padding: 0.6rem 1.5rem;
+  font-size: 1rem;
+  background: #c45c3e;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#ending-content .ending-back-btn:hover {
+  background: #d46a4a;
+}
