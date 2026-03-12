@@ -46,6 +46,7 @@ window.HOTSPOT_CONFIG = [
 window.HOTSPOT_DIALOGUES = {
   stall: {
     speaker: 'The stall',
+    image: 'https://images.unsplash.com/photo-1762944080344-7f15c77f70a1?w=600&q=80&auto=format&fit=crop',
     lines: [
       'Golden fried chicken pieces, basil, and garlic in a paper bag. The smell alone is worth the wait.',
       'When you\'re ready to buy a bag, I might need a hand catching a few things and watching the oil — then it\'s yours.'
@@ -53,6 +54,7 @@ window.HOTSPOT_DIALOGUES = {
   },
   'oil-pot': {
     speaker: '',
+    image: 'https://images.unsplash.com/photo-1762224180896-5761d5bbe90f?w=600&q=80&auto=format&fit=crop',
     lines: [
       'The oil is hot. Everything goes in and comes out crispy. You can hear it from here.',
       'One wrong moment and it\'s burnt; one right moment and it\'s perfect. That\'s the game.'
@@ -60,6 +62,7 @@ window.HOTSPOT_DIALOGUES = {
   },
   lantern: {
     speaker: '',
+    image: 'https://images.unsplash.com/photo-1743704458905-382b8a261d20?w=600&q=80&auto=format&fit=crop',
     lines: [
       'Red lanterns glow above the street. It\'s 2 AM but the night is still alive here.',
       'Back home the streets would be empty. Here they\'re just getting started.'
@@ -67,6 +70,7 @@ window.HOTSPOT_DIALOGUES = {
   },
   basil: {
     speaker: '',
+    image: 'https://images.unsplash.com/photo-1749655248287-d1e0acb5f8d1?w=600&q=80&auto=format&fit=crop',
     lines: [
       'That\'s basil — "nine-layer tower" in Chinese. They fry it with the chicken. It\'s not just decoration.',
       'Crispy leaves and golden chicken in the same bag. Don\'t ask, just try.'
@@ -74,6 +78,7 @@ window.HOTSPOT_DIALOGUES = {
   },
   'garlic-pile': {
     speaker: '',
+    image: 'https://images.unsplash.com/photo-1760445529922-ca58ca23c3a7?w=600&q=80&auto=format&fit=crop',
     lines: [
       'This whole corner is just garlic waiting to be chopped.',
       'The faster you chop, the more the whole street smells like midnight snacks.'
@@ -81,6 +86,7 @@ window.HOTSPOT_DIALOGUES = {
   },
   'sauce-bottles': {
     speaker: '',
+    image: 'https://images.unsplash.com/photo-1656269457984-bd54c519129a?w=600&q=80&auto=format&fit=crop',
     lines: [
       'Sweet, spicy, basil salt, seaweed pepper… every stall has its own mix.',
       'Get the order wrong and the locals will know immediately.'
@@ -88,12 +94,14 @@ window.HOTSPOT_DIALOGUES = {
   },
   'stall-buy': {
     speaker: 'Vendor',
+    image: 'https://images.unsplash.com/photo-1695654398992-125945541043?w=600&q=80&auto=format&fit=crop',
     lines: [
       'One bag? Help me catch a few ingredients and time the fry, then it\'s coming right up.'
     ]
   },
   'traveler-iceland': {
     speaker: '🇮🇸 Traveler from Iceland',
+    image: 'https://images.unsplash.com/photo-1529963183134-61a90db47eaf?w=600&q=80&auto=format&fit=crop',
     lines: [
       'At 2 AM where I\'m from, you only see the northern lights. Maybe a sheep.',
       'Here? A whole street of people waiting for… fried chicken?',
@@ -102,6 +110,7 @@ window.HOTSPOT_DIALOGUES = {
   },
   'traveler-mongolia': {
     speaker: '🇲🇳 Traveler from Mongolia',
+    image: 'https://images.unsplash.com/photo-1575415868394-e3b78f3e9b3f?w=600&q=80&auto=format&fit=crop',
     lines: [
       'We grill meat over fire. Big pieces. No oil.',
       'You put mushrooms in the same pot? And leaves?',
@@ -110,6 +119,7 @@ window.HOTSPOT_DIALOGUES = {
   },
   'traveler-bhutan': {
     speaker: '🇧🇹 Traveler from Bhutan',
+    image: 'https://images.unsplash.com/photo-1578556881786-851d4b79cb73?w=600&q=80&auto=format&fit=crop',
     lines: [
       'Does this come with chili? We put chili on everything.',
       'Ah, garlic and basil… and that smell. Okay.',
@@ -118,6 +128,7 @@ window.HOTSPOT_DIALOGUES = {
   },
   'traveler-madagascar': {
     speaker: '🇲🇬 Traveler from Madagascar',
+    image: 'https://images.unsplash.com/photo-1570742544137-3a469196c32b?w=600&q=80&auto=format&fit=crop',
     lines: [
       'Something in the air… vanilla? No. Spices.',
       'Garlic. And something green — basil? We use herbs too, but not like this.',
@@ -126,6 +137,7 @@ window.HOTSPOT_DIALOGUES = {
   },
   'traveler-paraguay': {
     speaker: '🇵🇾 Traveler from Paraguay',
+    image: 'https://images.unsplash.com/photo-1614949260630-1d8a27791215?w=600&q=80&auto=format&fit=crop',
     lines: [
       'One bag for one person? That\'s a lot of chicken.',
       'Oh — you share. We do that too. One big thing, everyone eats.',
@@ -134,6 +146,7 @@ window.HOTSPOT_DIALOGUES = {
   },
   'traveler-slovenia': {
     speaker: '🇸🇮 Traveler from Slovenia',
+    image: 'https://images.unsplash.com/photo-1478088913771-e3a36f50bb63?w=600&q=80&auto=format&fit=crop',
     lines: [
       'You fry the leaves? We put basil in soup.',
       'I didn\'t know leaves could be fried. And crunchy?',
@@ -142,6 +155,7 @@ window.HOTSPOT_DIALOGUES = {
   },
   'traveler-namibia': {
     speaker: '🇳🇦 Traveler from Namibia',
+    image: 'https://images.unsplash.com/photo-1563985336376-568060942b80?w=600&q=80&auto=format&fit=crop',
     lines: [
       'Our markets are busy. But not at 2 AM.',
       'This is more crowded than our busiest day. And everyone is here for… this?',
@@ -150,6 +164,7 @@ window.HOTSPOT_DIALOGUES = {
   },
   'traveler-albania': {
     speaker: '🇦🇱 Traveler from Albania',
+    image: 'https://images.unsplash.com/photo-1623167278440-fd212b72e1bd?w=600&q=80&auto=format&fit=crop',
     lines: [
       'I bit into something. Crunchy on the outside.',
       'Then soft. Chicken? And the green stuff — also crunchy. Weird. Good.',
@@ -158,6 +173,7 @@ window.HOTSPOT_DIALOGUES = {
   },
   'traveler-greenland': {
     speaker: '🇬🇱 Traveler from Greenland',
+    image: 'https://images.unsplash.com/photo-1537267013710-d7b37fa331b3?w=600&q=80&auto=format&fit=crop',
     lines: [
       'It\'s cold where I\'m from. Even at night in summer.',
       'This is the warmest night food I\'ve ever had. In your hands, in the bag.',
@@ -166,6 +182,7 @@ window.HOTSPOT_DIALOGUES = {
   },
   'traveler-bolivia': {
     speaker: '🇧🇴 Traveler from Bolivia',
+    image: 'https://images.unsplash.com/photo-1544142447-e43d0fe04bf2?w=600&q=80&auto=format&fit=crop',
     lines: [
       'Is this a festival? A holiday? Why is everyone here?',
       'No? Just… a normal night. People just come for fried chicken at 2 AM.',

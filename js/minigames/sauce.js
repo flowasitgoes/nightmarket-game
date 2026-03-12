@@ -30,8 +30,8 @@
   function handleChoice(type) {
     if (!overlay || overlay.classList.contains('hidden')) return;
     if (currentStep >= ORDER.length) return;
-    if (typeof window.AudioManager !== 'undefined') window.AudioManager.playClick();
     if (type === ORDER[currentStep]) {
+      if (typeof window.AudioManager !== 'undefined') window.AudioManager.playStepCorrect();
       currentStep++;
       if (currentStep >= ORDER.length) {
         updateProgress();
@@ -40,6 +40,7 @@
       }
     } else {
       mistakes++;
+      if (typeof window.AudioManager !== 'undefined') window.AudioManager.playClick();
       if (mistakes > maxMistakes) {
         updateProgress();
         endGame(false);

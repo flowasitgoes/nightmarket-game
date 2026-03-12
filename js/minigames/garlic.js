@@ -44,7 +44,7 @@
   function handleChop() {
     if (!playing) return;
     chops++;
-    if (typeof window.AudioManager !== 'undefined') window.AudioManager.playClick();
+    if (typeof window.AudioManager !== 'undefined') window.AudioManager.playChop();
     var now = window.performance && window.performance.now ? window.performance.now() : Date.now();
     var elapsed = now - startTime;
     updateProgress(Math.max(0, durationMs - elapsed));

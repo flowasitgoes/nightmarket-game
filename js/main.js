@@ -12,7 +12,9 @@
   var btnStart = null;
   var btnLeft = null;
   var btnRight = null;
+  var btnJump = null;
   var scrollStep = 280;
+  var isJumping = false;
   var playerName = 'Traveler';
   var visitedHotspots = new Set();
   var idleTimeout = null;
@@ -47,6 +49,18 @@
       playerEl.classList.add('Character--walk-down', 'idle');
       idleTimeout = null;
     }, 320);
+  }
+
+  function doJump() {
+    if (!playerEl || isJumping) return;
+    isJumping = true;
+    playerEl.classList.remove('Character--jump');
+    void playerEl.offsetWidth;
+    playerEl.classList.add('Character--jump');
+    setTimeout(function () {
+      playerEl.classList.remove('Character--jump');
+      isJumping = false;
+    }, 480);
   }
 
   function cyclePlayerSprite(delta) {
@@ -116,6 +130,7 @@
     btnStart = document.getElementById('btn-start');
     btnLeft = document.getElementById('btn-left');
     btnRight = document.getElementById('btn-right');
+    btnJump = document.getElementById('btn-jump');
     playerEl = document.getElementById('player-character');
     playerSpriteEl = document.getElementById('player-sprite-sheet');
 
@@ -139,6 +154,7 @@
       Scene.moveBy(scrollStep);
       setPlayerDirection('right');
     });
+    if (btnJump) btnJump.addEventListener('click', function () { doJump(); });
 
     document.addEventListener('keydown', function (e) {
       if (!gameViewport || !gameViewport.classList.contains('active')) return;
@@ -156,6 +172,9 @@
       } else if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') {
         e.preventDefault();
         cyclePlayerSprite(1);  // 下一個精靈
+      } else if (e.key === ' ') {
+        e.preventDefault();
+        doJump();
       }
     });
 
@@ -217,6 +236,10 @@
         playerEl.classList.remove('Character--walk-left', 'Character--walk-right', 'Character--walk-up');
         playerEl.classList.add('Character--walk-down', 'idle');
       }
+      var tvFrame = document.getElementById('game-tv-frame');
+      if (tvFrame) tvFrame.classList.add('tv-frame--on');
+      var gameVideo = document.getElementById('game-video-player');
+      if (gameVideo) gameVideo.play().catch(function () {});
       // Re-init scene with real viewport width (was 0 when game-viewport was hidden)
       var container = document.getElementById('scene-container');
       if (container && typeof Scene !== 'undefined') {

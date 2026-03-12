@@ -38,6 +38,25 @@
       </div>
       <button id="btn-mute" type="button" title="Mute">🔊</button>
 
+      <!-- 影片：本地剪輯 0:00–6:42 循環（原 YouTube 備註於下） -->
+      <div id="game-tv-frame" class="tv-frame" aria-hidden="true">
+        <div class="tv-frame__bezel">
+          <div id="game-youtube-wrap">
+            <video
+              id="game-video-player"
+              src="assets/video/game-video.mp4"
+              loop
+              muted
+              playsinline
+              preload="auto"
+              aria-label="Background video"
+            ></video>
+          </div>
+        </div>
+        <div class="tv-frame__base"></div>
+      </div>
+      <!-- 若改用 YouTube 可還原：iframe src="...?start=0&end=402&loop=1&playlist=ISZkoW27_do&controls=0&..." -->
+
       <div id="scene-container">
         <div id="scene">
           <div id="scene-bg" aria-hidden="true"></div>
@@ -52,17 +71,21 @@
 
       <button id="btn-left" type="button" aria-label="Move left">‹</button>
       <button id="btn-right" type="button" aria-label="Move right">›</button>
+      <button id="btn-jump" type="button" aria-label="Jump">↑</button>
     </div>
 
     <!-- First-time hint (dismissible) -->
     <div id="controls-hint" class="hidden">
-      <span>← → or A / D to move · ↑ ↓ or W / S to change character · Click flags & icons to talk</span>
+      <span>← → or A / D to move · Space to jump · ↑ ↓ or W / S to change character · Click flags & icons to talk</span>
       <button id="controls-hint-dismiss" type="button">OK</button>
     </div>
 
     <!-- Dialogue overlay -->
     <div id="dialogue-overlay" class="hidden">
       <div id="dialogue-box">
+        <div id="dialogue-image-wrap" class="hidden">
+          <img id="dialogue-image" src="" alt="" />
+        </div>
         <div id="dialogue-speaker"></div>
         <div id="dialogue-text"></div>
         <div id="dialogue-actions">
@@ -148,6 +171,7 @@
     </div>
   </div>
 
+  <script src="js/zzfx.js"></script>
   <script src="js/characters.js"></script>
   <script src="js/audio.js"></script>
   <script src="js/dialogue.js"></script>

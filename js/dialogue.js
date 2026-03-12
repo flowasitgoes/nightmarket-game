@@ -7,6 +7,8 @@
   var overlay = null;
   var speakerEl = null;
   var textEl = null;
+  var imageWrap = null;
+  var imageEl = null;
   var nextBtn = null;
   var closeBtn = null;
   var lines = [];
@@ -18,6 +20,8 @@
     overlay = document.getElementById('dialogue-overlay');
     speakerEl = document.getElementById('dialogue-speaker');
     textEl = document.getElementById('dialogue-text');
+    imageWrap = document.getElementById('dialogue-image-wrap');
+    imageEl = document.getElementById('dialogue-image');
     nextBtn = document.getElementById('dialogue-next');
     closeBtn = document.getElementById('dialogue-close');
     if (!overlay || !textEl) return;
@@ -39,12 +43,23 @@
     }
   }
 
-  function show(speaker, singleLineOrLines) {
+  function show(speaker, singleLineOrLines, imageUrl) {
     var arr = Array.isArray(singleLineOrLines) ? singleLineOrLines : [singleLineOrLines];
     lines = arr;
     index = 0;
     if (speakerEl) speakerEl.textContent = speaker || '';
     textEl.textContent = lines[0] || '';
+    if (imageWrap && imageEl) {
+      if (imageUrl) {
+        imageEl.src = imageUrl;
+        imageEl.alt = speaker ? speaker + ' — ' : '';
+        imageWrap.classList.remove('hidden');
+      } else {
+        imageEl.src = '';
+        imageEl.alt = '';
+        imageWrap.classList.add('hidden');
+      }
+    }
     nextBtn.classList.toggle('only-close', lines.length <= 1);
     overlay.classList.remove('hidden');
     overlay.classList.add('visible');
@@ -64,6 +79,10 @@
     var id = currentHotspotId;
     overlay.classList.add('hidden');
     overlay.classList.remove('visible');
+    if (imageWrap && imageEl) {
+      imageEl.src = '';
+      imageWrap.classList.add('hidden');
+    }
     currentHotspotId = null;
     if (onCloseCallback && id) onCloseCallback(id);
   }
@@ -81,8 +100,9 @@
     }
     var speaker = data.speaker || '';
     var dialogue = data.lines || data.line;
+    var imageUrl = data.image || '';
     if (typeof dialogue === 'string') dialogue = [dialogue];
-    show(speaker, dialogue);
+    show(speaker, dialogue, imageUrl);
   }
 
   window.Dialogue = {
