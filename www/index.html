@@ -114,25 +114,22 @@
       </div>
       <button id="btn-mute" type="button" title="Mute">🔊</button>
 
-      <!-- 影片：本地剪輯 0:00–6:42 循環（原 YouTube 備註於下） -->
+      <!-- 影片：YouTube 嵌入循環（0:00–6:42） -->
       <div id="game-tv-frame" class="tv-frame" aria-hidden="true">
         <div class="tv-frame__bezel">
           <div id="game-youtube-wrap">
-            <video
+            <iframe
               id="game-video-player"
-              src="assets/video/game-video.mp4"
-              loop
-              muted
-              playsinline
-              preload="auto"
+              src="https://www.youtube.com/embed/ISZkoW27_do?start=0&end=402&loop=1&playlist=ISZkoW27_do&controls=0&mute=1&autoplay=1&playsinline=1"
+              allow="autoplay; encrypted-media"
+              allowfullscreen
               aria-label="Background video"
               title="Night market street background"
-            ></video>
+            ></iframe>
           </div>
         </div>
         <div class="tv-frame__base"></div>
       </div>
-      <!-- 若改用 YouTube 可還原：iframe src="...?start=0&end=402&loop=1&playlist=ISZkoW27_do&controls=0&..." -->
 
       <div id="scene-container">
         <canvas id="game-bubbles-canvas" aria-hidden="true"></canvas>

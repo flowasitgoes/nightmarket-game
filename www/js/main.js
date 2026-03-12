@@ -277,7 +277,7 @@
       var tvFrame = document.getElementById('game-tv-frame');
       if (tvFrame) tvFrame.classList.add('tv-frame--on');
       var gameVideo = document.getElementById('game-video-player');
-      if (gameVideo) gameVideo.play().catch(function () {});
+      if (gameVideo && gameVideo.tagName === 'VIDEO') gameVideo.play().catch(function () {});
       // Re-init scene with real viewport width (was 0 when game-viewport was hidden)
       var container = document.getElementById('scene-container');
       if (container && typeof Scene !== 'undefined') {
